@@ -1,15 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { useSelector } from "react-redux";
-import { RootState } from "@/app/store/store";
 import { useTranslation } from "@/app/hooks/Home";
 import { Utensils, Car, Heart, Building, Map, BarChart } from "lucide-react";
 import { motion } from "framer-motion";
 import heroImg from "@/public/logo.png"; // Your hero image
 
 export default function HomePage() {
-  const language = useSelector((state: RootState) => state.language.language);
   const t = useTranslation();
 
   // Map service keys to icons

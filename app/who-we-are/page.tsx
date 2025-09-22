@@ -1,7 +1,5 @@
 "use client";
 
-import { useSelector } from "react-redux";
-import { RootState } from "@/app/store/store";
 import { motion } from "framer-motion";
 import { useTranslation } from "@/app/hooks/aboutUs";
 import {
@@ -12,14 +10,12 @@ import {
   Map,
   BarChart,
   Flag,
-  Target,
   Eye,
   Star,
   CheckCircle,
 } from "lucide-react";
 
 export default function AboutPage() {
-  const language = useSelector((state: RootState) => state.language.language);
   const t = useTranslation();
 
   // Map services to icons

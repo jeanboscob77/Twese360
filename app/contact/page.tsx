@@ -1,14 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "@/app/store/store";
 import { useTranslation } from "@/app/hooks/Contact";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Globe } from "lucide-react";
 
 export default function ContactPage() {
-  const language = useSelector((state: RootState) => state.language.language);
   const t = useTranslation();
 
   const [formData, setFormData] = useState({
