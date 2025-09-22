@@ -1,0 +1,70 @@
+{
+  "home": "Ahabanza",
+  "whoWeAre": "Twebwe",
+  "contact": "Twandikire",
+  "services": {
+    "Food": {
+      "label": "Ibiribwa",
+      "submenu": {
+        "Ordering & Delivery": "Gutanga no kohereza",
+        "Local Restaurants": "Resitora zaho",
+        "Delivery Options": "Uburyo bwo kohereza",
+        "Events Catering": "Gucateringa ibirori",
+        "Decorators & Servers": "Abatunganya ibirori n’abatumi",
+        "Personal Chefs": "Abateka ku giti cyabo",
+        "Busy Professionals": "Abakozi bafite akazi kenshi"
+      }
+    },
+    "Transport": {
+      "label": "Ubwikorezi",
+      "submenu": {
+        "Car Renting": "Gutwara imodoka",
+        "With/Without Driver": "N’umushoferi cyangwa ntawe",
+        "Purchase Car": "Kugura imodoka"
+      }
+    },
+    "Weddings": {
+      "label": "Ubukwe",
+      "submenu": {
+        "Event Management": "Gucunga ibirori",
+        "Music & Bands": "Umuziki & amatsinda",
+        "Protocol": "Protokole",
+        "Transport": "Ubwikorezi",
+        "Food and drinks": "Ibiribwa n’ibinyobwa",
+        "Clothes": "Imyenda",
+        "Save the Date": "Bika itariki",
+        "Wedding Invitation": "Ubutumire bw’ubukwe",
+        "Gifts cover & Badges": "Imyenda n’impano"
+      }
+    },
+    "Rentals": {
+      "label": "Amacumbi",
+      "submenu": {
+        "Apartments & Houses": "Amazu n’amaapartments",
+        "House": "Inzu",
+        "Office & Space": "Ibiro n’ahakorerwa"
+      }
+    },
+    "Tourism": {
+      "label": "Ubukerarugendo",
+      "submenu": {
+        "Hotel Booking": "Gufata Hotel",
+        "Guidance": "Ubujyanama",
+        "Gorilla Trekking": "Gutembera ingagi",
+        "City Tours": "Gutembera mu mijyi",
+        "Nature Walks": "Gutembera mu ishyamba"
+      }
+    },
+    "Research Services": {
+      "label": "Serivisi z’ubushakashatsi",
+      "submenu": {
+        "Field Enumerators": "Ababarura ibarura",
+        "Data Analysis": "Isesengura ry’amakuru",
+        "Survey Design & Reports": "Igenamigambi n’Raporo",
+        "Software Traing": "Amahugurwa ya software",
+        "Data Entry": "Kwemeza amakuru",
+        "Dashboard Design": "Igishushanyo cya dashboard"
+      }
+    }
+  }
+}

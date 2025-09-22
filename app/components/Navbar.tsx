@@ -1,88 +1,96 @@
 "use client";
 import Image from "next/image";
-import logo from "@/public/logo.png";
-import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronDown, Menu, X } from "lucide-react";
+import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState, AppDispatch } from "@/app/store/store";
+import { setLanguage } from "@/app/store/languageSlice";
+import { useTranslation } from "../hooks/useTranslation";
+import logo from "@/public/logo.png";
+export type SubmenuItem = {
+  label: string;
+  href: string;
+};
 
-const services = [
-  {
-    label: "Food",
-    submenu: [
-      { label: "Ordering & Delivery", href: "/food/ordering-delivery" },
-      { label: "Local Restaurants", href: "/food/local-restaurants" },
-      { label: "Delivery Options", href: "/food/delivery-options" },
-      { label: "Events Catering", href: "/food/events-catering" },
-      { label: "Decorators & Servers", href: "/food/decorators-servers" },
-      { label: "Personal Chefs", href: "/food/personal-chefs" },
-      { label: "Busy Professionals", href: "/food/busy-professionals" },
-    ],
-  },
-  {
-    label: "Transport",
-    submenu: [
-      { label: "Car Renting", href: "/transport/car-renting" },
-      { label: "With/Without Driver", href: "/transport/with-without-driver" },
-      { label: "Events & Tourism", href: "/transport/events-tourism" },
-      { label: "Driver Services", href: "/transport/driver-services" },
-      { label: "Long-term Hiring", href: "/transport/long-term-hiring" },
-      { label: "Package Delivery", href: "/transport/package-delivery" },
-    ],
-  },
-  {
-    label: "Weddings",
-    submenu: [
-      { label: "Event Management", href: "/weddings/event-management" },
-      { label: "Music & Bands", href: "/weddings/music-bands" },
-      { label: "Attire & Gifts", href: "/weddings/attire-gifts" },
-    ],
-  },
-  {
-    label: "Rentals",
-    submenu: [
-      { label: "Car Rentals", href: "/rentals/car-rentals" },
-      { label: "Apartments & Houses", href: "/rentals/apartments-houses" },
-      { label: "Short & Long Stay", href: "/rentals/short-long-stay" },
-      { label: "Office & Space", href: "/rentals/office-space" },
-    ],
-  },
-  {
-    label: "Tourism",
-    submenu: [
-      { label: "Travel Packages", href: "/tourism/travel-packages" },
-      { label: "Hotel Booking", href: "/tourism/hotel-booking" },
-      { label: "City & Rural Tours", href: "/tourism/city-rural-tours" },
-    ],
-  },
-  {
-    label: "Data Services",
-    submenu: [
-      { label: "Field Enumerators", href: "/data-services/field-enumerators" },
-      { label: "Data Analysis", href: "/data-services/data-analysis" },
-      { label: "Survey & Reports", href: "/data-services/survey-reports" },
-    ],
-  },
-];
+export type ServiceItem = {
+  label: string;
+  submenu: SubmenuItem[];
+};
+
+export type Translations = {
+  home: string;
+  whoWeAre: string;
+  contact: string;
+  services: {
+    [key: string]: {
+      label: string;
+      submenu: {
+        [subKey: string]: string;
+      };
+    };
+  };
+};
 
 export default function Navbar() {
   const pathname = usePathname();
+  const dispatch = useDispatch<AppDispatch>();
+  const language = useSelector((state: RootState) => state.language.language);
+
+  const t = useTranslation() as Translations;
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileDropdownIndex, setMobileDropdownIndex] = useState<number | null>(
     null
   );
 
-  // Check if current path matches exact href
   const isActive = (href: string) => pathname === href;
-
-  // Check if any submenu item matches current path
   const isSubmenuActive = (submenu: { href: string }[]) =>
     submenu.some((item) => pathname === item.href);
 
+  // Convert t.services object into array for easier mapping
+
+  const servicesArray: ServiceItem[] = Object.entries(t.services).map(
+    ([key, value]) => ({
+      label: value.label,
+      submenu: Object.entries(value.submenu).map(([subKey, subLabel]) => ({
+        label: subLabel, // ✅ typed as string
+        href: `/${key.toLowerCase().replace(/\s+/g, "-")}/${subKey
+          .toLowerCase()
+          .replace(/\s+/g, "-")}`,
+      })),
+    })
+  );
+
   return (
-    <nav className="bg-blue-700 text-white shadow-md sticky top-0 z-50">
+    <nav className="bg-white text-black shadow-md sticky top-0 z-50">
+      {/* Language Switcher */}
+      <div className="flex justify-end space-x-2 mt-2 mb-1 px-4 md:px-8">
+        <button
+          onClick={() => dispatch(setLanguage("en"))}
+          className={`px-3 py-1 rounded-md text-sm transition duration-300 ${
+            language === "en"
+              ? "bg-blue-900 text-yellow-300 font-bold"
+              : "hover:bg-blue-200"
+          }`}
+        >
+          EN
+        </button>
+        <button
+          onClick={() => dispatch(setLanguage("rw"))}
+          className={`px-3 py-1 rounded-md text-sm transition duration-300 ${
+            language === "rw"
+              ? "bg-blue-900 text-yellow-300 font-bold"
+              : "hover:bg-blue-200"
+          }`}
+        >
+          RW
+        </button>
+      </div>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16 md:h-24">
+        <div className="flex justify-between items-center h-20 md:h-24">
           <Link
             href="/"
             className="font-bold text-xl tracking-wide hover:text-yellow-300 transition-colors duration-300"
@@ -98,31 +106,32 @@ export default function Navbar() {
           <div className="hidden md:flex space-x-6 items-center">
             <Link
               href="/"
-              className={`px-3 py-2 rounded-md  transition duration-300 hover:bg-blue-600  ease-in-out hover:scale-105   ${
+              className={`px-3 py-2 rounded-md transition duration-300 hover:bg-blue-900 hover:text-white hover:scale-105 ${
                 isActive("/")
                   ? "bg-blue-900 font-extrabold text-yellow-300 border-b-4 border-yellow-300"
                   : ""
               }`}
             >
-              Home
+              {t.home}
             </Link>
             <Link
               href="/who-we-are"
-              className={`px-3 py-2 rounded-md transition duration-300 hover:bg-blue-600 hover:scale-105 ${
+              className={`px-3 py-2 rounded-md transition duration-300 hover:bg-blue-900 hover:text-white hover:scale-105 ${
                 isActive("/who-we-are")
                   ? "bg-blue-900 font-extrabold text-yellow-300 border-b-4 border-yellow-300"
                   : ""
               }`}
             >
-              Who We Are
+              {t.whoWeAre}
             </Link>
 
-            {services.map((menu, idx) => {
+            {/* Services */}
+            {servicesArray.map((menu, idx) => {
               const parentActive = isSubmenuActive(menu.submenu);
               return (
                 <div key={idx} className="relative group">
                   <div
-                    className={`flex items-center gap-1 px-3 py-2 rounded-md transition duration-300 hover:bg-blue-600 hover:scale-105 ${
+                    className={`flex items-center gap-1 px-3 py-2 rounded-md transition duration-300 hover:bg-blue-900 hover:text-white hover:scale-105 ${
                       parentActive
                         ? "bg-blue-900 font-extrabold text-yellow-300 border-b-4 border-yellow-300"
                         : ""
@@ -132,7 +141,6 @@ export default function Navbar() {
                     <ChevronDown
                       size={16}
                       className="transition-transform duration-300 ease-in-out group-hover:rotate-180"
-                      aria-hidden="true"
                     />
                   </div>
 
@@ -167,13 +175,14 @@ export default function Navbar() {
               className="focus:outline-none"
             >
               {mobileMenuOpen ? (
-                <X size={28} className="text-white" />
+                <X size={28} className="text-blue-600" />
               ) : (
-                <Menu size={28} className="text-white" />
+                <Menu size={28} className="text-blue-600" />
               )}
             </button>
           </div>
-          {/*conact page*/}
+
+          {/* Contact */}
           <div className="hidden md:flex">
             <Link
               href="/contact"
@@ -183,7 +192,7 @@ export default function Navbar() {
                   : ""
               }`}
             >
-              Contact us
+              {t.contact}
             </Link>
           </div>
         </div>
@@ -191,19 +200,19 @@ export default function Navbar() {
 
       {/* Mobile Dropdown */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-blue-600 text-white animate-slideDown">
+        <div className="md:hidden bg-blue-500 text-white animate-slideDown">
           <ul className="flex flex-col space-y-1 py-2">
             <li>
               <Link
                 href="/"
-                className={`block px-5 py-3 rounded-md transform transition duration-300 ease-in-out hover:scale-105 hover:bg-blue-400 hover:text-white  ${
+                className={`block px-5 py-3 rounded-md transform transition duration-300 ease-in-out hover:scale-105 hover:bg-blue-400 hover:text-white ${
                   isActive("/")
-                    ? "bg-slate-600 text-white font-extrabold border-l-4 border-yellow-800"
+                    ? "bg-slate-600 text-white font-extrabold border-l-4 border-yellow-300"
                     : "text-white"
                 }`}
                 onClick={() => setMobileMenuOpen(false)}
               >
-                Home
+                {t.home}
               </Link>
             </li>
             <li>
@@ -211,16 +220,17 @@ export default function Navbar() {
                 href="/who-we-are"
                 className={`block px-5 py-3 rounded-md transform transition duration-300 ease-in-out hover:scale-105 hover:bg-blue-400 hover:text-white ${
                   isActive("/who-we-are")
-                    ? "bg-slate-600 text-white font-extrabold border-l-4 border-yellow-800"
+                    ? "bg-slate-600 text-white font-extrabold border-l-4 border-yellow-300"
                     : ""
                 }`}
                 onClick={() => setMobileMenuOpen(false)}
               >
-                Who We Are
+                {t.whoWeAre}
               </Link>
             </li>
 
-            {services.map((menu, idx) => {
+            {/* Mobile Services */}
+            {servicesArray.map((menu, idx) => {
               const parentActive = isSubmenuActive(menu.submenu);
               return (
                 <li key={idx}>
@@ -267,6 +277,20 @@ export default function Navbar() {
                 </li>
               );
             })}
+            {/* Contact Us Link */}
+            <li>
+              <Link
+                href="/contact"
+                className={`block px-5 py-3 rounded-md transform transition duration-300 ease-in-out hover:scale-105 hover:bg-blue-400 hover:text-white ${
+                  isActive("/contact")
+                    ? "bg-slate-600 text-white font-extrabold border-l-4 border-yellow-300"
+                    : "text-white"
+                }`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {t.contact}
+              </Link>
+            </li>
           </ul>
         </div>
       )}
