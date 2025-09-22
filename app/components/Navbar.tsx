@@ -186,7 +186,7 @@ export default function Navbar() {
           <div className="hidden md:flex">
             <Link
               href="/contact"
-              className={`px-3 py-2 rounded-md transition duration-300 hover:bg-blue-600 hover:scale-105 ${
+              className={`px-3 py-2 rounded-md transition duration-300 hover:bg-blue-600 hover:text-white hover:scale-105 ${
                 isActive("/contact")
                   ? "bg-blue-900 font-extrabold text-yellow-300 border-b-4 border-yellow-300"
                   : ""

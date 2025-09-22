@@ -1,5 +1,5 @@
-import en from "@/app/translations/locales/en";
-import rw from "@/app/translations/locales/rw.js";
+import en from "@/app/translations/Home/en";
+import rw from "@/app/translations/Home/rw.js";
 import { useSelector } from "react-redux";
 import { RootState } from "@/app/store/store";
 
