@@ -4,10 +4,19 @@
 import { useState } from "react";
 import { Mail, Phone, MapPin, User, FileText, Send } from "lucide-react";
 
+interface ServiceRequestData {
+  name: string;
+  email: string;
+  phone: string;
+  address: string;
+  serviceName?: string;
+  notes?: string;
+}
+
 interface ServiceRequestFormProps {
   serviceName: string;
   description?: string;
-  onSubmit: (formData: any) => void;
+  onSubmit: (formData: ServiceRequestData) => void;
 }
 
 export default function ServiceRequestForm({

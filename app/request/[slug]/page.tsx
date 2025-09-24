@@ -7,6 +7,15 @@ interface Props {
   params: { slug: string };
 }
 
+interface ServiceRequestData {
+  name: string;
+  email: string;
+  phone: string;
+  address: string;
+  serviceName?: string;
+  message?: string;
+}
+
 export default function ServicePage({ params }: Props) {
   const slug = params.slug;
   const t = useTranslation();
@@ -16,7 +25,7 @@ export default function ServicePage({ params }: Props) {
     return <div className="p-6">Service not found</div>;
   }
 
-  const handleSubmit = (data: any) => {
+  const handleSubmit = (data: ServiceRequestData) => {
     console.log("Order Submitted:", data);
     // Later: send this data to API / email service
   };
