@@ -2,7 +2,7 @@
 "use client";
 import { useTranslation } from "@/app/hooks/Slug";
 import ServiceRequestForm from "@/app/components/ServiceRequestForm";
-
+import { useParams } from "next/navigation";
 interface Props {
   params: { slug: string };
 }
@@ -17,7 +17,8 @@ interface ServiceRequestData {
 }
 
 export default function ServicePage({ params }: Props) {
-  const slug = params.slug;
+  const pramas = useParams();
+  const slug = pramas?.slug;
   const t = useTranslation();
   const service = t.services[slug as keyof typeof t.services];
 
