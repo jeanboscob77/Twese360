@@ -21,7 +21,7 @@ const en = {
         "Enjoy hot meals anytime",
         "Affordable service fees",
       ],
-      cta: { text: "Order Now", link: "/request/ordering-delivery" },
+      cta: { text: "Order Now", link: "/request/service/ordering-delivery" },
       image: "/images/services/ordering-delivery.jpg",
     },
     "local-restaurants": {
@@ -40,7 +40,7 @@ const en = {
       ],
       cta: {
         text: "Explore Restaurants",
-        link: "/request/local-restaurants",
+        link: "/request/service/local-restaurants",
       },
       image: "/images/services/local-restaurants.jpg",
     },
@@ -60,7 +60,7 @@ const en = {
       ],
       cta: {
         text: "Check Options",
-        link: "/request/delivery-options",
+        link: "/request/service/delivery-options",
       },
       image: "/images/services/delivery-options.jpg",
     },
@@ -78,7 +78,7 @@ const en = {
         "High-quality meals",
         "Memorable dining experience",
       ],
-      cta: { text: "Book Catering", link: "/request/events-catering" },
+      cta: { text: "Book Catering", link: "/request/service/events-catering" },
       image: "/images/services/events-catering.jpg",
     },
     "decorators-servers": {
@@ -97,7 +97,7 @@ const en = {
       ],
       cta: {
         text: "Hire Team",
-        link: "/request/decorators-servers",
+        link: "/request/service/decorators-servers",
       },
       image: "/images/services/decorators-servers.jpg",
     },
@@ -117,7 +117,7 @@ const en = {
       ],
       cta: {
         text: "Hire Chef",
-        link: "/request/personal-chefs",
+        link: "/request/service/personal-chefs",
       },
       image: "/images/services/personal-chefs.jpg",
     },
@@ -137,7 +137,7 @@ const en = {
       ],
       cta: {
         text: "Get Meal Plan",
-        link: "/request/busy-professionals",
+        link: "/request/service/busy-professionals",
       },
       image: "/images/services/busy-professionals.jpg",
     },

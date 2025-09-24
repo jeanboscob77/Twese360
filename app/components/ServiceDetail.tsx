@@ -87,7 +87,7 @@ export default function ServiceDetail() {
       {/* Call to Action */}
       {service.cta && (
         <div className="text-center mt-10">
-          <Link href={service.cta.link}>
+          <Link href={service.cta.link} passHref>
             <Button className="bg-blue-600 hover:bg-blue-700 text-white">
               {service.cta.text}
             </Button>
