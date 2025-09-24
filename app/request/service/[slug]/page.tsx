@@ -3,9 +3,6 @@
 import { useTranslation } from "@/app/hooks/Slug";
 import ServiceRequestForm from "@/app/components/ServiceRequestForm";
 import { useParams } from "next/navigation";
-interface Props {
-  params: { slug: string };
-}
 
 interface ServiceRequestData {
   name: string;
