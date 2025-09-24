@@ -51,7 +51,7 @@ export default function AboutPage() {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
+        transition={{ duration: 0.3 }}
       >
         <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mb-8 text-center">
           {t.aboutPage.whatWeDoTitle}

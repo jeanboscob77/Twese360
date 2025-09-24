@@ -4,7 +4,8 @@ import "./globals.css";
 import Header from "@/app/components/Navbar";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
-
+import Footer from "./components/Footer";
+import GoTop from "./components/GoTop";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -28,6 +29,8 @@ export default function RootLayout({
         <Provider store={store}>
           <Header />
           {children}
+          <GoTop />
+          <Footer />
         </Provider>
       </body>
     </html>

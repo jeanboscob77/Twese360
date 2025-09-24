@@ -1,250 +1,169 @@
+// components/Footer.tsx
 "use client";
-import React, { useState } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { ChevronDown, Menu, X } from "lucide-react";
+import Image from "next/image";
+import {
+  FaFacebookF,
+  FaTwitter,
+  FaInstagram,
+  FaLinkedinIn,
+} from "react-icons/fa";
+import { Mail, Phone, MapPin, ArrowRight } from "lucide-react";
+import logo from "@/public/logo.png";
+import { useFooterTranslation } from "@/app/hooks/footer";
 
-const services = [
-  {
-    label: "Food",
-    submenu: [
-      { label: "Ordering & Delivery", href: "/food/ordering-delivery" },
-      { label: "Local Restaurants", href: "/food/local-restaurants" },
-      { label: "Delivery Options", href: "/food/delivery-options" },
-      { label: "Events Catering", href: "/food/events-catering" },
-      { label: "Decorators & Servers", href: "/food/decorators-servers" },
-      { label: "Personal Chefs", href: "/food/personal-chefs" },
-      { label: "Busy Professionals", href: "/food/busy-professionals" },
-    ],
-  },
-  {
-    label: "Transport",
-    submenu: [
-      { label: "Car Renting", href: "/transport/car-renting" },
-      { label: "With/Without Driver", href: "/transport/driver-options" },
-      { label: "Events & Tourism", href: "/transport/events-tourism" },
-      { label: "Driver Services", href: "/transport/driver-services" },
-      { label: "Long-term Hiring", href: "/transport/long-term-hiring" },
-      { label: "Package Delivery", href: "/transport/package-delivery" },
-    ],
-  },
-  {
-    label: "Weddings",
-    submenu: [
-      { label: "Event Management", href: "/weddings/event-management" },
-      { label: "Music & Bands", href: "/weddings/music-bands" },
-      { label: "Attire & Gifts", href: "/weddings/attire-gifts" },
-    ],
-  },
-  {
-    label: "Rentals",
-    submenu: [
-      { label: "Car Rentals", href: "/rentals/car-rentals" },
-      { label: "Apartments & Houses", href: "/rentals/apartments-houses" },
-      { label: "Short & Long Stay", href: "/rentals/short-long-stay" },
-      { label: "Office & Space", href: "/rentals/office-space" },
-    ],
-  },
-  {
-    label: "Tourism",
-    submenu: [
-      { label: "Travel Packages", href: "/tourism/travel-packages" },
-      { label: "Hotel Booking", href: "/tourism/hotel-booking" },
-      { label: "City & Rural Tours", href: "/tourism/city-rural-tours" },
-    ],
-  },
-  {
-    label: "Data Services",
-    submenu: [
-      { label: "Field Enumerators", href: "/data-services/field-enumerators" },
-      { label: "Data Analysis", href: "/data-services/data-analysis" },
-      { label: "Survey & Reports", href: "/data-services/survey-reports" },
-    ],
-  },
-];
+// --- Types ---
+interface SocialMedia {
+  facebook: string;
+  twitter: string;
+  instagram: string;
+  linkedin: string;
+}
 
-export default function Navbar() {
-  const pathname = usePathname();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [mobileDropdownIndex, setMobileDropdownIndex] = useState<number | null>(
-    null
-  );
+interface QuickLink {
+  label: string;
+  href: string;
+}
 
-  const isActive = (href: string) => pathname === href;
+interface ContactInfo {
+  address: string;
+  email: string;
+  phones: string[];
+}
 
-  // Check if any submenu item is active (used for highlighting parent menu)
-  const isSubmenuActive = (submenu: (typeof services)[0]["submenu"]) =>
-    submenu.some((item) => isActive(item.href));
+interface Newsletter {
+  title: string;
+  subtitle: string;
+  placeholder: string;
+  button: string;
+}
+
+interface FooterTranslation {
+  description: string;
+  socialMedia: SocialMedia;
+  quickLinks: QuickLink[];
+  contact: ContactInfo;
+  newsletter: Newsletter;
+  copyright: string;
+  headings: {
+    quickLinks: string;
+    followUs: string;
+  };
+}
+
+export default function Footer() {
+  const t = useFooterTranslation() as FooterTranslation;
 
   return (
-    <nav className="bg-blue-700 text-white shadow-md sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <Link href="/" className="font-bold text-xl tracking-wide">
-            OneRwanda Hub
-          </Link>
-
-          {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-6 items-center">
-            <Link
-              href="/"
-              className={`px-3 py-2 rounded-md transition duration-300 hover:bg-blue-600 hover:scale-105 ${
-                isActive("/")
-                  ? "bg-blue-900 font-extrabold text-yellow-300 border-b-4 border-yellow-300"
-                  : ""
-              }`}
-            >
-              Home
-            </Link>
-            <Link
-              href="/who-we-are"
-              className={`px-3 py-2 rounded-md transition duration-300 hover:bg-blue-600 hover:scale-105 ${
-                isActive("/who-we-are")
-                  ? "bg-blue-900 font-extrabold text-yellow-300 border-b-4 border-yellow-300"
-                  : ""
-              }`}
-            >
-              Who We Are
-            </Link>
-
-            {services.map((menu, idx) => {
-              const parentActive = isSubmenuActive(menu.submenu);
-              return (
-                <div
-                  key={idx}
-                  className="relative group"
-                  style={{ minWidth: "10rem" }}
-                >
-                  <button
-                    className={`flex items-center gap-1 px-3 py-2 rounded-md transition duration-300 hover:bg-blue-600 hover:scale-105 ${
-                      parentActive
-                        ? "bg-blue-900 font-extrabold text-yellow-300 border-b-4 border-yellow-300"
-                        : ""
-                    }`}
-                  >
-                    {menu.label}
-                    <ChevronDown
-                      size={16}
-                      className="transition-transform duration-300 group-hover:rotate-180"
-                    />
-                  </button>
-
-                  <div
-                    className="absolute left-0 top-full mt-0 w-64 bg-white text-black rounded-md shadow-lg z-50 opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 origin-top pointer-events-auto"
-                    style={{ userSelect: "none" }}
-                  >
-                    <ul className="py-2">
-                      {menu.submenu.map((sub, i) => (
-                        <li key={i}>
-                          <Link
-                            href={sub.href}
-                            className={`block px-4 py-2 rounded-md transition duration-200 hover:bg-blue-100 hover:scale-105 ${
-                              isActive(sub.href)
-                                ? "bg-blue-200 font-semibold text-blue-900 border-l-4 border-blue-600"
-                                : ""
-                            }`}
-                          >
-                            {sub.label}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              );
-            })}
+    <footer className="bg-gray-900 text-gray-200">
+      <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-4 gap-10">
+        {/* Logo & Company Info */}
+        <div>
+          <div className="flex items-center mb-4">
+            <Image
+              src={logo}
+              alt="Twese360 Logo"
+              width={50}
+              height={50}
+              className="mr-3"
+            />
+            <h2 className="text-2xl font-bold text-white">Twese360</h2>
           </div>
+          <p className="text-gray-400 mb-4">{t.description}</p>
 
-          {/* Mobile Menu Toggle */}
-          <div className="md:hidden">
-            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-              {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          <div className="flex items-center gap-2 mb-2">
+            <MapPin className="w-5 h-5 text-blue-500" />
+            <span>{t.contact.address}</span>
+          </div>
+          <div className="flex items-center gap-2 mb-2">
+            <Mail className="w-5 h-5 text-green-500" />
+            <span>{t.contact.email}</span>
+          </div>
+          {t.contact.phones.map((phone, idx) => (
+            <div key={idx} className="flex items-center gap-2">
+              <Phone className="w-5 h-5 text-yellow-500" />
+              <span>{phone}</span>
+            </div>
+          ))}
+        </div>
+
+        {/* Quick Links */}
+        <div>
+          <h3 className="text-xl font-semibold text-white mb-4">
+            {t.headings.quickLinks}
+          </h3>
+          <ul className="space-y-2 text-gray-400">
+            {t.quickLinks.map((link, idx) => (
+              <li
+                key={idx}
+                className="flex items-center gap-2 hover:text-white transition-colors"
+              >
+                <ArrowRight className="w-4 h-4 text-blue-500" />
+                <a href={link.href}>{link.label}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Social Media */}
+        <div>
+          <h3 className="text-xl font-semibold text-white mb-4">
+            {t.headings.followUs}
+          </h3>
+          <div className="flex space-x-4">
+            <a
+              href={t.socialMedia.facebook}
+              className="p-3 rounded-full bg-gray-800 hover:bg-blue-600 transition-colors"
+            >
+              <FaFacebookF className="w-5 h-5 text-white" />
+            </a>
+            <a
+              href={t.socialMedia.twitter}
+              className="p-3 rounded-full bg-gray-800 hover:bg-blue-400 transition-colors"
+            >
+              <FaTwitter className="w-5 h-5 text-white" />
+            </a>
+            <a
+              href={t.socialMedia.instagram}
+              className="p-3 rounded-full bg-gray-800 hover:bg-pink-500 transition-colors"
+            >
+              <FaInstagram className="w-5 h-5 text-white" />
+            </a>
+            <a
+              href={t.socialMedia.linkedin}
+              className="p-3 rounded-full bg-gray-800 hover:bg-blue-700 transition-colors"
+            >
+              <FaLinkedinIn className="w-5 h-5 text-white" />
+            </a>
+          </div>
+        </div>
+
+        {/* Newsletter */}
+        <div>
+          <h3 className="text-xl font-semibold text-white mb-4">
+            {t.newsletter.title}
+          </h3>
+          <p className="text-gray-400 mb-4">{t.newsletter.subtitle}</p>
+          <form className="flex flex-col sm:flex-row gap-2">
+            <input
+              type="email"
+              placeholder={t.newsletter.placeholder}
+              className="w-full px-4 py-2 rounded-lg border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-600 bg-gray-800 text-white"
+            />
+            <button
+              type="submit"
+              className="flex items-center justify-center px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 transition-colors text-white font-semibold"
+            >
+              {t.newsletter.button}
+              <ArrowRight className="w-4 h-4 ml-2" />
             </button>
-          </div>
+          </form>
         </div>
       </div>
 
-      {/* Mobile Dropdown */}
-      {mobileMenuOpen && (
-        <div className="md:hidden bg-blue-600 text-white animate-slideDown">
-          <ul className="flex flex-col space-y-1 py-2">
-            <li>
-              <Link
-                href="/"
-                className={`block px-5 py-3 rounded-md transform transition duration-300 ease-in-out hover:scale-105 hover:bg-yellow-500 hover:text-blue-900 ${
-                  isActive("/")
-                    ? "bg-yellow-600 text-blue-900 font-extrabold border-l-4 border-yellow-800"
-                    : "text-white"
-                }`}
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/who-we-are"
-                className={`block px-5 py-3 rounded-md transform transition duration-300 ease-in-out hover:scale-105 hover:bg-yellow-500 hover:text-blue-900 ${
-                  isActive("/who-we-are")
-                    ? "bg-yellow-600 text-blue-900 font-extrabold border-l-4 border-yellow-800"
-                    : "text-white"
-                }`}
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Who We Are
-              </Link>
-            </li>
-
-            {services.map((menu, idx) => {
-              const parentActive = isSubmenuActive(menu.submenu);
-              return (
-                <li key={idx}>
-                  <button
-                    onClick={() =>
-                      setMobileDropdownIndex(
-                        mobileDropdownIndex === idx ? null : idx
-                      )
-                    }
-                    className={`w-full flex justify-between items-center px-5 py-3 font-semibold rounded-md transform transition duration-300 ease-in-out hover:scale-105 hover:bg-yellow-500 hover:text-blue-900 ${
-                      parentActive
-                        ? "bg-yellow-600 text-blue-900 border-l-4 border-yellow-800 underline underline-offset-4"
-                        : ""
-                    }`}
-                  >
-                    {menu.label}
-                    <ChevronDown
-                      size={18}
-                      className={`transition-transform duration-300 ease-in-out ${
-                        mobileDropdownIndex === idx ? "rotate-180" : ""
-                      }`}
-                    />
-                  </button>
-
-                  {mobileDropdownIndex === idx && (
-                    <ul className="bg-yellow-400 rounded-b-md overflow-hidden transition-all duration-300 ease-in-out">
-                      {menu.submenu.map((sub, i) => (
-                        <li key={i}>
-                          <Link
-                            href={sub.href}
-                            className={`block px-8 py-2 rounded-md transform transition duration-200 hover:scale-105 hover:bg-yellow-300 hover:text-blue-900 ${
-                              isActive(sub.href)
-                                ? "bg-yellow-500 font-semibold text-blue-900 border-l-4 border-yellow-700"
-                                : "bg-yellow-400"
-                            }`}
-                            onClick={() => setMobileMenuOpen(false)}
-                          >
-                            {sub.label}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      )}
-    </nav>
+      {/* Bottom */}
+      <div className="border-t border-gray-700 py-6 mt-6 text-center text-gray-500 text-sm">
+        &copy; {new Date().getFullYear()} Twese360. {t.copyright}
+      </div>
+    </footer>
   );
 }
