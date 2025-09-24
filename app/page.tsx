@@ -50,7 +50,7 @@ export default function HomePage() {
           className="md:w-1/2 mb-8 md:mb-0"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.4 }}
         >
           <h1 className="text-4xl md:text-5xl font-bold mb-6 drop-shadow-lg">
             {t.homepage?.heroTitle || "Welcome to Our Company"}
@@ -70,7 +70,7 @@ export default function HomePage() {
           className="md:w-1/2"
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.4 }}
         >
           <Image
             src={heroImg}

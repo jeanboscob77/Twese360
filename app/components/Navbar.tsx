@@ -49,17 +49,23 @@ export default function Navbar() {
   const isSubmenuActive = (submenu: { href: string }[]) =>
     submenu.some((item) => pathname === item.href);
 
+  function slugify(text: string) {
+    return text
+      .toLowerCase()
+      .replace(/\s+/g, "-") // replace spaces with hyphen
+      .replace(/[^\w-]/g, "") // remove all non-alphanumeric chars except hyphen
+      .replace(/-+/g, "-"); // replace multiple hyphens with a single one
+  }
   // Convert t.services object into array for easier mapping
-
   const servicesArray: ServiceItem[] = Object.entries(t.services).map(
-    ([key, value]) => ({
-      label: value.label,
-      submenu: Object.entries(value.submenu).map(([subKey, subLabel]) => ({
-        label: subLabel, // ✅ typed as string
-        href: `/${key.toLowerCase().replace(/\s+/g, "-")}/${subKey
-          .toLowerCase()
-          .replace(/\s+/g, "-")}`,
-      })),
+    ([categoryKey, categoryValue]) => ({
+      label: categoryValue.label,
+      submenu: Object.entries(categoryValue.submenu).map(
+        ([subKey, subLabel]) => ({
+          label: subLabel,
+          href: `/services/${slugify(categoryKey)}/${slugify(subKey)}`,
+        })
+      ),
     })
   );
 

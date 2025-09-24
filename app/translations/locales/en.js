@@ -20,7 +20,7 @@ const en = {
       label: "Transport",
       submenu: {
         "Car Renting": "Car Renting",
-        "With/Without Driver": "With/Without Driver",
+        "With-Without-Driver": "With/Without Driver",
         "Purchase Car": "Purchase Car",
       },
     },
@@ -62,7 +62,7 @@ const en = {
         "Field Enumerators": "Field Enumerators",
         "Data Analysis": "Data Analysis",
         "Survey Design & Reports": "Survey Design & Reports",
-        "Software Traing": "Software Training",
+        "Software Training": "Software Training",
         "Data Entry": "Data Entry",
         "Dashboard Design": "Dashboard Design",
       },

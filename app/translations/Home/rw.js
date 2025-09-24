@@ -1,5 +1,5 @@
 const rw = {
-  contact: "Contact Us",
+  contact: "Twandikire",
   services: {
     Food: {
       label: "Ibiribwa",

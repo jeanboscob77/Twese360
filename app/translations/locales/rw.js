@@ -19,7 +19,7 @@ const rw = {
       label: "Ubwikorezi",
       submenu: {
         "Car Renting": "Gutwara imodoka",
-        "With/Without Driver": "N’umushoferi cyangwa ntawe",
+        "With-Without-Driver": "N’umushoferi cyangwa ntawe",
         "Purchase Car": "Kugura imodoka",
       },
     },
@@ -61,7 +61,7 @@ const rw = {
         "Field Enumerators": "Ababarura ibarura",
         "Data Analysis": "Isesengura ry’amakuru",
         "Survey Design & Reports": "Igenamigambi n’Raporo",
-        "Software Traing": "Amahugurwa ya software",
+        "Software Training": "Amahugurwa ya software",
         "Data Entry": "Kwemeza amakuru",
         "Dashboard Design": "Igishushanyo cya dashboard",
       },
