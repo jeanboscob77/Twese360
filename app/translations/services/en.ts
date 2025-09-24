@@ -21,7 +21,7 @@ const en = {
         "Enjoy hot meals anytime",
         "Affordable service fees",
       ],
-      cta: { text: "Order Now", link: "/services/food/ordering-and-delivery" },
+      cta: { text: "Order Now", link: "/request/ordering-delivery" },
       image: "/images/services/ordering-delivery.jpg",
     },
     "local-restaurants": {
@@ -40,7 +40,7 @@ const en = {
       ],
       cta: {
         text: "Explore Restaurants",
-        link: "/services/food/local-restaurants",
+        link: "/request/local-restaurants",
       },
       image: "/images/services/local-restaurants.jpg",
     },
@@ -60,7 +60,7 @@ const en = {
       ],
       cta: {
         text: "Check Options",
-        link: "/services/food/delivery-options",
+        link: "/request/delivery-options",
       },
       image: "/images/services/delivery-options.jpg",
     },
@@ -78,7 +78,7 @@ const en = {
         "High-quality meals",
         "Memorable dining experience",
       ],
-      cta: { text: "Book Catering", link: "/services/food/events-catering" },
+      cta: { text: "Book Catering", link: "/request/events-catering" },
       image: "/images/services/events-catering.jpg",
     },
     "decorators-servers": {
@@ -97,7 +97,7 @@ const en = {
       ],
       cta: {
         text: "Hire Team",
-        link: "/services/food/decorators-servers",
+        link: "/request/decorators-servers",
       },
       image: "/images/services/decorators-servers.jpg",
     },
@@ -117,7 +117,7 @@ const en = {
       ],
       cta: {
         text: "Hire Chef",
-        link: "/services/food/personal-chefs",
+        link: "/request/personal-chefs",
       },
       image: "/images/services/personal-chefs.jpg",
     },
@@ -137,7 +137,7 @@ const en = {
       ],
       cta: {
         text: "Get Meal Plan",
-        link: "/services/food/busy-professionals",
+        link: "/request/busy-professionals",
       },
       image: "/images/services/busy-professionals.jpg",
     },
@@ -157,7 +157,7 @@ const en = {
         "Flexible rental packages",
         "24/7 support",
       ],
-      cta: { text: "Rent Car", link: "/services/transport/car-renting" },
+      cta: { text: "Rent Car", link: "/request/car-renting" },
       image: "/images/services/car-renting.jpg",
     },
     "with-without-driver": {
@@ -176,7 +176,7 @@ const en = {
       ],
       cta: {
         text: "Book Ride",
-        link: "/services/transport/with-without-driver",
+        link: "/request/with-without-driver",
       },
       image: "/images/services/with-without-driver.jpg",
     },
@@ -196,7 +196,7 @@ const en = {
       ],
       cta: {
         text: "Buy Car",
-        link: "/services/transport/purchase-car",
+        link: "/request/purchase-car",
       },
       image: "/images/services/purchase-car.jpg",
     },
@@ -218,7 +218,7 @@ const en = {
       ],
       cta: {
         text: "Plan Wedding",
-        link: "/services/weddings/event-management",
+        link: "/request/event-management",
       },
       image: "/images/services/event-management.jpg",
     },
@@ -232,7 +232,7 @@ const en = {
         "Professional sound quality",
         "Memorable music",
       ],
-      cta: { text: "Book Music", link: "/services/weddings/music-bands" },
+      cta: { text: "Book Music", link: "request/music-bands" },
       image: "/images/services/music-bands.jpg",
     },
     protocol: {
@@ -249,7 +249,7 @@ const en = {
         "Stress-free hosting",
         "Professional image",
       ],
-      cta: { text: "Hire Protocol", link: "/services/weddings/protocol" },
+      cta: { text: "Hire Protocol", link: "/request/protocol" },
       image: "/images/services/protocol.jpg",
     },
     "wedding-transport": {
@@ -260,7 +260,7 @@ const en = {
       benefits: ["Arrive in style", "Memorable photos", "Reliable service"],
       cta: {
         text: "Book Car",
-        link: "/services/weddings/transport",
+        link: "/request/transport",
       },
       image: "/images/services/wedding-transport.jpg",
     },
@@ -276,7 +276,7 @@ const en = {
       benefits: ["Memorable experience", "Delicious meals", "Happy guests"],
       cta: {
         text: "Book Catering",
-        link: "/services/weddings/food-and-drinks",
+        link: "request/food-and-drinks",
       },
       image: "/images/services/wedding-food.jpg",
     },
@@ -294,7 +294,7 @@ const en = {
         "Affordable packages",
         "Latest fashion trends",
       ],
-      cta: { text: "Shop Outfits", link: "/services/weddings/clothes" },
+      cta: { text: "Shop Outfits", link: "/request/clothes" },
       image: "/images/services/wedding-clothes.jpg",
     },
     "save-the-date": {
@@ -313,7 +313,7 @@ const en = {
       ],
       cta: {
         text: "Design Card",
-        link: "/services/weddings/save-the-date",
+        link: "/request/save-the-date",
       },
       image: "/images/services/save-the-date.jpg",
     },
@@ -329,7 +329,7 @@ const en = {
       ],
       cta: {
         text: "Design Invitation",
-        link: "/services/weddings/wedding-invitation",
+        link: "/request/wedding-invitation",
       },
       image: "/images/services/wedding-invitation.jpg",
     },
@@ -349,7 +349,7 @@ const en = {
       ],
       cta: {
         text: "Order Accessories",
-        link: "/services/weddings/gifts-cover-badges",
+        link: "/request/gifts-cover-badges",
       },
       image: "/images/services/wedding-gifts.jpg",
     },
@@ -372,7 +372,7 @@ const en = {
       ],
       cta: {
         text: "Book Car",
-        link: "/services/weddings/transport",
+        link: "/request/transport",
       },
       image: "/images/services/wedding-transport.jpg",
     },
@@ -389,7 +389,7 @@ const en = {
       ],
       cta: {
         text: "Find a Home",
-        link: "/services/rentals/apartments-houses",
+        link: "/request/apartments-houses",
       },
       image: "/images/services/apartments-houses.jpg",
     },
@@ -407,7 +407,7 @@ const en = {
         "Verified listings",
         "Trusted landlords",
       ],
-      cta: { text: "Rent House", link: "/services/rentals/house" },
+      cta: { text: "Rent House", link: "request/house" },
       image: "/images/services/house.jpg",
     },
     "office-space": {
@@ -425,7 +425,7 @@ const en = {
       ],
       cta: {
         text: "Rent Office",
-        link: "/services/rentals/office-space",
+        link: "/request/office-space",
       },
       image: "/images/services/office-space.jpg",
     },
@@ -439,7 +439,7 @@ const en = {
       benefits: ["No hidden charges", "Trusted service", "24/7 support"],
       cta: {
         text: "Book Hotel",
-        link: "/services/tourism/hotel-booking",
+        link: "/request/hotel-booking",
       },
       image: "/images/services/hotel-booking.jpg",
     },
@@ -453,7 +453,7 @@ const en = {
         "Learn local culture",
         "Safe travels",
       ],
-      cta: { text: "Hire Guide", link: "/services/tourism/guidance" },
+      cta: { text: "Hire Guide", link: "/request/guidance" },
       image: "/images/services/guidance.jpg",
     },
     "gorilla-trekking": {
@@ -472,7 +472,7 @@ const en = {
       ],
       cta: {
         text: "Book Trek",
-        link: "/services/tourism/gorilla-trekking",
+        link: "/request/gorilla-trekking",
       },
       image: "/images/services/gorilla-trekking.jpg",
     },
@@ -486,7 +486,7 @@ const en = {
         "Safe and fun trips",
         "Great for families",
       ],
-      cta: { text: "Explore Kigali", link: "/services/tourism/city-tours" },
+      cta: { text: "Explore Kigali", link: "/request/city-tours" },
       image: "/images/services/city-tours.jpg",
     },
     "nature-walks": {
@@ -499,7 +499,7 @@ const en = {
         "Affordable packages",
       ],
       benefits: ["Relax and refresh", "Learn biodiversity", "Safe eco-tourism"],
-      cta: { text: "Go for Walk", link: "/services/tourism/nature-walks" },
+      cta: { text: "Go for Walk", link: "/request/nature-walks" },
       image: "/images/services/nature-walks.jpg",
     },
 
@@ -520,7 +520,7 @@ const en = {
       ],
       cta: {
         text: "Hire Team",
-        link: "/services/research/field-enumerators",
+        link: "/request/field-enumerators",
       },
       image: "/images/services/field-enumerators.jpg",
     },
@@ -536,7 +536,7 @@ const en = {
       ],
       cta: {
         text: "Request Analysis",
-        link: "/services/research/data-analysis",
+        link: "/request/data-analysis",
       },
       image: "/images/services/data-analysis.jpg",
     },
@@ -552,7 +552,7 @@ const en = {
       ],
       cta: {
         text: "Design Survey",
-        link: "/services/research/survey-design-reports",
+        link: "/request/survey-design-reports",
       },
       image: "/images/services/survey-design.jpg",
     },
@@ -564,7 +564,7 @@ const en = {
       benefits: ["Learn new skills", "Advance career", "Practical knowledge"],
       cta: {
         text: "Join Training",
-        link: "/services/research/software-training",
+        link: "/request/software-training",
       },
       image: "/images/services/software-training.jpg",
     },
@@ -574,7 +574,7 @@ const en = {
         "Fast and accurate data entry services to support your projects.",
       features: ["Skilled staff", "Secure systems", "Affordable packages"],
       benefits: ["Save time", "Accurate records", "Affordable service"],
-      cta: { text: "Request Service", link: "/services/research/data-entry" },
+      cta: { text: "Request Service", link: "/request/data-entry" },
       image: "/images/services/data-entry.jpg",
     },
     "dashboard-design": {
@@ -589,7 +589,7 @@ const en = {
       ],
       cta: {
         text: "Design Dashboard",
-        link: "/services/research/dashboard-design",
+        link: "/request/dashboard-design",
       },
       image: "/images/services/dashboard-design.jpg",
     },

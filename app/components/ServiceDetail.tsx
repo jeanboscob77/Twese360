@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Button } from "@/app/components/ui/Button";
 import { useTranslation } from "@/app/hooks/Service";
 import { CheckCircleIcon, StarIcon } from "@heroicons/react/24/solid";
+import Link from "next/link";
 
 interface SubService {
   title: string;
@@ -38,15 +39,15 @@ export default function ServiceDetail() {
       </div>
 
       {/* Title & Description */}
-      <h1 className="text-4xl font-extrabold mb-6 text-gray-800">
+      <h1 className="text-4xl font-extrabold mb-5 text-gray-800">
         {service.title}
       </h1>
-      <p className="text-lg text-gray-600 mb-12">{service.description}</p>
+      <p className="text-xg text-gray-600 mb-5">{service.description}</p>
 
       {/* Features */}
       {service.features && service.features.length > 0 && (
         <div className="mb-12">
-          <h2 className="text-2xl font-semibold mb-5 text-gray-800">
+          <h2 className="text-xl sm:text-md font-semibold mb-5 text-gray-800">
             {service.features}
           </h2>
           <div className="grid sm:grid-cols-2 gap-6">
@@ -86,9 +87,11 @@ export default function ServiceDetail() {
       {/* Call to Action */}
       {service.cta && (
         <div className="text-center mt-10">
-          <Button className="bg-blue-600 hover:bg-blue-700 text-white">
-            <a href={service.cta.link}>{service.cta.text}</a>
-          </Button>
+          <Link href={service.cta.link}>
+            <Button className="bg-blue-600 hover:bg-blue-700 text-white">
+              {service.cta.text}
+            </Button>
+          </Link>
         </div>
       )}
     </div>
