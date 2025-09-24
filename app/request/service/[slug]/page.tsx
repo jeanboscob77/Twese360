@@ -16,7 +16,7 @@ interface ServiceRequestData {
   message?: string;
 }
 
-export default function ServicePage({ params }: Props) {
+export default function ServicePage() {
   const pramas = useParams();
   const slug = pramas?.slug;
   const t = useTranslation();
