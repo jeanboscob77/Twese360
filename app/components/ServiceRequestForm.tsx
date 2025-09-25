@@ -16,6 +16,8 @@ interface ServiceRequestData {
 interface ServiceRequestFormProps {
   serviceName: string;
   description?: string;
+  submit: string;
+  request: string;
   onSubmit: (formData: ServiceRequestData) => void;
 }
 
@@ -23,6 +25,8 @@ export default function ServiceRequestForm({
   serviceName,
   description,
   onSubmit,
+  submit,
+  request,
 }: ServiceRequestFormProps) {
   const [formData, setFormData] = useState({
     name: "",
@@ -61,7 +65,7 @@ export default function ServiceRequestForm({
       className="max-w-lg mx-auto bg-white p-6 rounded-2xl shadow-md space-y-4"
     >
       <h2 className="text-2xl font-bold text-gray-800 mb-2">
-        Request: {serviceName}
+        {request}: {serviceName}
       </h2>
       {description && (
         <p className="text-gray-600 mb-4 text-sm">{description}</p>
@@ -142,7 +146,7 @@ export default function ServiceRequestForm({
         className="w-full py-2 px-4 flex items-center justify-center gap-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold transition-colors"
       >
         <Send className="w-4 h-4" />
-        Submit Request
+        {submit}
       </button>
     </form>
   );

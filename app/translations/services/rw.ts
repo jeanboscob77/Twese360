@@ -23,7 +23,7 @@ const rw = {
       ],
       cta: {
         text: "Tegereza Ubu",
-        link: "/request/ordering-and-delivery",
+        link: "/request/service/ordering-and-delivery",
       },
       image: "/images/services/ordering-delivery.jpg",
     },
@@ -43,7 +43,7 @@ const rw = {
       ],
       cta: {
         text: "Reba Amarestora",
-        link: "/request/local-restaurants",
+        link: "/request/service/local-restaurants",
       },
       image: "/images/services/local-restaurants.jpg",
     },
@@ -61,7 +61,10 @@ const rw = {
         "Serivisi yizewe",
         "Byateguwe kugira ngo bihuze n’igihe cyawe",
       ],
-      cta: { text: "Reba Amahitamo", link: "/request/delivery-options" },
+      cta: {
+        text: "Reba Amahitamo",
+        link: "/request/service/delivery-options",
+      },
       image: "/images/services/delivery-options.jpg",
     },
     "events-catering": {
@@ -78,7 +81,10 @@ const rw = {
         "Amafunguro yo mu rwego rwo hejuru",
         "Ubunararibonye bwo gufata neza abashyitsi",
       ],
-      cta: { text: "Bukinga Serivisi", link: "/request/events-catering" },
+      cta: {
+        text: "Bukinga Serivisi",
+        link: "/request/service/events-catering",
+      },
       image: "/images/services/events-catering.jpg",
     },
     "decorators-servers": {
@@ -97,7 +103,7 @@ const rw = {
       ],
       cta: {
         text: "Kodesha Itsinda",
-        link: "/request/decorators-servers",
+        link: "/request/service/decorators-servers",
       },
       image: "/images/services/decorators-servers.jpg",
     },
@@ -117,7 +123,7 @@ const rw = {
       ],
       cta: {
         text: "Kodesha Umunyamwuga",
-        link: "/request/personal-chefs",
+        link: "/request/service/personal-chefs",
       },
       image: "/images/services/personal-chefs.jpg",
     },
@@ -137,7 +143,7 @@ const rw = {
       ],
       cta: {
         text: "Fata Igenamafunguro",
-        link: "/request/busy-professionals",
+        link: "/request/service/busy-professionals",
       },
       image: "/images/services/busy-professionals.jpg",
     },
@@ -153,7 +159,7 @@ const rw = {
         "Ibiciro bihendutse",
       ],
       benefits: ["Imodoka zizewe", "Amahitamo atandukanye", "Ubufasha 24/7"],
-      cta: { text: "Kodesha Imodoka", link: "/request/car-renting" },
+      cta: { text: "Kodesha Imodoka", link: "/request/service/car-renting" },
       image: "/images/services/car-renting.jpg",
     },
     "with-without-driver": {
@@ -172,7 +178,7 @@ const rw = {
       ],
       cta: {
         text: "Bukinga Urugendo",
-        link: "/request/with-without-driver",
+        link: "/request/service/with-without-driver",
       },
       image: "/images/services/with-without-driver.jpg",
     },
@@ -190,7 +196,7 @@ const rw = {
         "Kwishyura mu buryo bworoshye",
         "Imodoka zikomeye kandi zidapfa vuba",
       ],
-      cta: { text: "Gura Imodoka", link: "/request/purchase-car" },
+      cta: { text: "Gura Imodoka", link: "/request/service/purchase-car" },
       image: "/images/services/purchase-car.jpg",
     },
 
@@ -211,7 +217,7 @@ const rw = {
       ],
       cta: {
         text: "Tegura Ubukwe",
-        link: "/request/event-management",
+        link: "/request/service/event-management",
       },
       image: "/images/services/event-management.jpg",
     },
@@ -229,7 +235,7 @@ const rw = {
         "Ireme ry’ijwi ryiza",
         "Umuziki wibukwa",
       ],
-      cta: { text: "Bukinga Umuziki", link: "/request/music-bands" },
+      cta: { text: "Bukinga Umuziki", link: "/request/service/music-bands" },
       image: "/images/services/music-bands.jpg",
     },
     protocol: {
@@ -246,7 +252,7 @@ const rw = {
         "Kwakira bitariho imihangayiko",
         "Isura y’ubunyamwuga",
       ],
-      cta: { text: "Kodesha Protokole", link: "/request/protocol" },
+      cta: { text: "Kodesha Protokole", link: "/request/service/protocol" },
       image: "/images/services/protocol.jpg",
     },
     "wedding-transport": {
@@ -259,7 +265,7 @@ const rw = {
         "Kugerera ku gihe",
       ],
       benefits: ["Kugera mu buryo bwiza", "Amafoto yibukwa", "Serivisi yizewe"],
-      cta: { text: "Bukinga Imodoka", link: "/request/transport" },
+      cta: { text: "Bukinga Imodoka", link: "/request/service/transport" },
       image: "/images/services/wedding-transport.jpg",
     },
     "food-and-drinks": {
@@ -274,7 +280,7 @@ const rw = {
       benefits: ["Uburambe bwiza", "Amafunguro meza", "Abashyitsi banyuzwe"],
       cta: {
         text: "Bukinga Serivisi",
-        link: "/request/food-and-drinks",
+        link: "/request/service/food-and-drinks",
       },
       image: "/images/services/wedding-food.jpg",
     },
@@ -292,7 +298,7 @@ const rw = {
         "Pakeji zihendutse",
         "Imyambarire igezweho",
       ],
-      cta: { text: "Shaka Imyambaro", link: "/request/clothes" },
+      cta: { text: "Shaka Imyambaro", link: "/request/service/clothes" },
       image: "/images/services/wedding-clothes.jpg",
     },
     "save-the-date": {
@@ -309,7 +315,7 @@ const rw = {
         "Ibishushanyo byiza",
         "Ibiciro byiza",
       ],
-      cta: { text: "Tegura Ikarita", link: "/request/save-the-date" },
+      cta: { text: "Tegura Ikarita", link: "/request/service/save-the-date" },
       image: "/images/services/save-the-date.jpg",
     },
     "wedding-invitation": {
@@ -328,7 +334,7 @@ const rw = {
       ],
       cta: {
         text: "Tegura Ubutumire",
-        link: "/request/wedding-invitation",
+        link: "/request/service/wedding-invitation",
       },
       image: "/images/services/wedding-invitation.jpg",
     },
@@ -348,7 +354,7 @@ const rw = {
       ],
       cta: {
         text: "Tegura Ibikoresho",
-        link: "/request/gifts-cover-badges",
+        link: "/request/service/gifts-cover-badges",
       },
       image: "/images/services/wedding-gifts.jpg",
     },
@@ -371,7 +377,7 @@ const rw = {
       ],
       cta: {
         text: "Tegura Imodoka",
-        link: "/request/transport",
+        link: "/request/service/transport",
       },
       image: "/images/services/wedding-transport.jpg",
     },
@@ -383,7 +389,7 @@ const rw = {
         "Shaka inzu cyangwa apartments zihendutse mu mujyi wa Kigali.",
       features: ["Inzu zizewe", "Aho gutura hizewe", "Kwishyura byoroshye"],
       benefits: ["Gukodesha bitagoye", "Inzu zihendutse", "Amahitamo menshi"],
-      cta: { text: "Shaka Inzu", link: "/request/apartments-houses" },
+      cta: { text: "Shaka Inzu", link: "/request/service/apartments-houses" },
       image: "/images/services/apartments-houses.jpg",
     },
     house: {
@@ -396,7 +402,7 @@ const rw = {
         "Ibiciro bihendutse",
       ],
       benefits: ["Kubaho neza", "Inzu zizewe", "Ba nyir’inzu b’inyangamugayo"],
-      cta: { text: "Kodesha Inzu", link: "/services/rentals/house" },
+      cta: { text: "Kodesha Inzu", link: "/services/service/house" },
       image: "/images/services/house.jpg",
     },
     "office-space": {
@@ -412,7 +418,7 @@ const rw = {
         "Ibiciro bihendutse",
         "Aho gukorera hateguye",
       ],
-      cta: { text: "Kodesha Ibiro", link: "/request/office-space" },
+      cta: { text: "Kodesha Ibiro", link: "/request/service/office-space" },
       image: "/images/services/office-space.jpg",
     },
 
@@ -422,7 +428,7 @@ const rw = {
       description: "Shaka hoteli zihendutse cyangwa zigezweho dukorana nazo.",
       features: ["Hoteli zizewe", "Ibiciro bihendutse", "Kubika byoroshye"],
       benefits: ["Nta biciro byihishe", "Serivisi yizewe", "Ubufasha 24/7"],
-      cta: { text: "Bukinga Hoteli", link: "/services/tourism/hotel-booking" },
+      cta: { text: "Bukinga Hoteli", link: "/services/service/hotel-booking" },
       image: "/images/services/hotel-booking.jpg",
     },
     guidance: {
@@ -435,7 +441,7 @@ const rw = {
         "Kumenya umuco",
         "Urugendo rw’umutekano",
       ],
-      cta: { text: "Kodesha Umuyobozi", link: "/request/guidance" },
+      cta: { text: "Kodesha Umuyobozi", link: "/request/service/guidance" },
       image: "/images/services/guidance.jpg",
     },
     "gorilla-trekking": {
@@ -450,7 +456,7 @@ const rw = {
       ],
       cta: {
         text: "Bukinga Urugendo",
-        link: "/request/gorilla-trekking",
+        link: "/request/service/gorilla-trekking",
       },
       image: "/images/services/gorilla-trekking.jpg",
     },
@@ -464,7 +470,7 @@ const rw = {
         "Ibyo gusura byinshi",
       ],
       benefits: ["Gukunda igihugu", "Kumenya amateka", "Iburambe ryihariye"],
-      cta: { text: "Bukinga Tour", link: "/request/city-tours" },
+      cta: { text: "Bukinga Tour", link: "/request/service/city-tours" },
       image: "/images/services/city-tours.jpg",
     },
     "nature-walks": {
@@ -477,7 +483,7 @@ const rw = {
         "Pakeji zihendutse",
       ],
       benefits: ["Kuruhuka", "Kumenya ibyiza by’igihugu", "Iburambe ryiza"],
-      cta: { text: "Tangira Kugenda", link: "/request/nature-walks" },
+      cta: { text: "Tangira Kugenda", link: "/request/service/nature-walks" },
       image: "/images/services/nature-walks.jpg",
     },
 
@@ -494,7 +500,7 @@ const rw = {
       benefits: ["Ibisubizo byizewe", "Amakuru meza", "Itsinda ry’umwuga"],
       cta: {
         text: "Kodesha Abashakashatsi",
-        link: "/services/research/field-enumerators",
+        link: "/services/service/field-enumerators",
       },
       image: "/images/services/field-enumerators.jpg",
     },
@@ -506,7 +512,7 @@ const rw = {
       benefits: ["Ibisubizo byizewe", "Amakuru meza", "Raporo z’umwuga"],
       cta: {
         text: "Tangira Isesengura",
-        link: "/request/data-analysis",
+        link: "/request/service/data-analysis",
       },
       image: "/images/services/data-analysis.jpg",
     },
@@ -522,7 +528,7 @@ const rw = {
       benefits: ["Ibisubizo bifatika", "Raporo zizewe", "Uburambe buhanitse"],
       cta: {
         text: "Tangira Ubushakashatsi",
-        link: "/request/survey-design-reports",
+        link: "/request/service/survey-design-reports",
       },
       image: "/images/services/survey-design.jpg",
     },
@@ -538,7 +544,7 @@ const rw = {
       ],
       cta: {
         text: "Iyandikishe",
-        link: "/request/software-training",
+        link: "/request/service/software-training",
       },
       image: "/images/services/software-training.jpg",
     },
@@ -551,7 +557,7 @@ const rw = {
         "Itsinda ry’umwuga",
       ],
       benefits: ["Amakuru yizewe", "Kuzigama igihe", "Kwishyura bike"],
-      cta: { text: "Tangira Ubu", link: "/request/data-entry" },
+      cta: { text: "Tangira Ubu", link: "/request/service/data-entry" },
       image: "/images/services/data-entry.jpg",
     },
     "dashboard-design": {
@@ -570,7 +576,7 @@ const rw = {
       ],
       cta: {
         text: "Shaka Dashboard",
-        link: "/request/dashboard-design",
+        link: "/request/service/dashboard-design",
       },
       image: "/images/services/dashboard-design.jpg",
     },

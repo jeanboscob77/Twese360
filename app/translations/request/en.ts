@@ -1,6 +1,9 @@
 // translations/en.ts
 const en = {
   services: {
+    submit: "Submit",
+    request: "Request Service",
+    "not-found": "Service not found",
     // ============== FOOD ==================
     "ordering-delivery": {
       title: "Ordering & Delivery",
@@ -179,5 +182,6 @@ const en = {
 
   // You can keep other sections like footer, navbar, etc.
 };
+export type Translation = typeof en;
 
 export default en;

@@ -1,6 +1,10 @@
 // translations/rw.ts
 const rw = {
   services: {
+    submit: "Ohereza",
+    request: "Serivisi Uri gusaba",
+    "not-found": "Serivisi ntibonetse",
+    // ============== WEDDINGS ==================
     // ============== FOOD ==================
     "ordering-delivery": {
       title: "Gutanga no Kuha Ibiryo",
@@ -179,4 +183,5 @@ const rw = {
   // ushobora kongeraho footer, navbar n’ibindi hano
 };
 
+export type Translation = typeof rw;
 export default rw;
