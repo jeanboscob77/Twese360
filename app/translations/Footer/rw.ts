@@ -27,6 +27,9 @@ const rw = {
         "Iyandikishe kugira ngo ubone amakuru agezweho ku serivisi zacu.",
       placeholder: "Email yawe",
       button: "Iyandikishe",
+      subscriptionSuccess: "Wiyandikishije neza kuri newsletter!",
+      submissionError: "Habaye ikibazo. Ongera ugerageze.",
+      invalidEmail: "Injiza aderesi ya imeri ikwiye.",
     },
     headings: {
       quickLinks: "Uko Wahera",

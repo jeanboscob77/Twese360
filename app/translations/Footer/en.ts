@@ -26,6 +26,9 @@ const en = {
       subtitle: "Subscribe to get updates about our latest services.",
       placeholder: "Your email",
       button: "Subscribe",
+      invalidEmail: "Please enter a valid email address.",
+      subscriptionSuccess: "You have subscribed successfully!",
+      submissionError: "Something went wrong. Please try again.",
     },
     headings: {
       quickLinks: "Quick Links",

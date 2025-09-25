@@ -1,20 +1,19 @@
 "use client";
 
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { useTranslation } from "@/app/hooks/Contact";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Globe } from "lucide-react";
 
 export default function ContactPage() {
-  const t = useTranslation();
-
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    number: "",
+    phone: "",
     message: "",
   });
-
+  const t = useTranslation();
   const [success, setSuccess] = useState(false);
 
   const handleChange = (
@@ -23,11 +22,46 @@ export default function ContactPage() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(formData);
-    setSuccess(true);
-    setFormData({ name: "", email: "", number: "", message: "" });
+
+    // --------------- Basic Validation ----------------
+    if (!formData.name.trim()) {
+      toast.error(t.alerts.invalidName.text);
+      return;
+    }
+    if (!formData.message.trim()) {
+      toast.error(t.alerts.invalidMessage.text);
+      return;
+    }
+    if (
+      formData.email &&
+      !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(formData.email)
+    ) {
+      toast.error(t.alerts.invalidEmail.text);
+      return;
+    }
+    if (formData.phone && !/^[0-9+\-\s]{7,15}$/.test(formData.phone)) {
+      toast.error(t.alerts.invalidPhone.text);
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:5000/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) throw new Error("Failed to submit");
+
+      toast.success(t.alerts.successContact.text);
+      setSuccess(true);
+      setFormData({ name: "", email: "", phone: "", message: "" });
+    } catch (err) {
+      console.error(err);
+      toast.error(t.alerts.submissionError.text);
+    }
   };
 
   return (
@@ -63,7 +97,6 @@ export default function ContactPage() {
               placeholder={t.contactPage?.form.name}
               value={formData.name}
               onChange={handleChange}
-              required
               className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300"
             />
             <input
@@ -72,14 +105,13 @@ export default function ContactPage() {
               placeholder={t.contactPage?.form.email}
               value={formData.email}
               onChange={handleChange}
-              required
               className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300"
             />
             <input
               type="text"
-              name="number"
+              name="phone"
               placeholder={t.contactPage?.form.number}
-              value={formData.number}
+              value={formData.phone}
               onChange={handleChange}
               className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300"
             />
@@ -88,7 +120,6 @@ export default function ContactPage() {
               placeholder={t.contactPage?.form.message}
               value={formData.message}
               onChange={handleChange}
-              required
               rows={5}
               className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300"
             />

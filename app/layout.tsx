@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import { store } from "./store/store";
 import Footer from "./components/Footer";
 import GoTop from "./components/GoTop";
+import { Toaster } from "react-hot-toast";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -31,6 +32,7 @@ export default function RootLayout({
           {children}
           <GoTop />
           <Footer />
+          <Toaster position="top-right" reverseOrder={false} />
         </Provider>
       </body>
     </html>

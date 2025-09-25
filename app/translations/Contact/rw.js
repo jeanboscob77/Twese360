@@ -23,6 +23,41 @@ const rw = {
       website: "Urubuga",
     },
   },
+
+  alerts: {
+    invalidName: {
+      title: "Izina ntiryujuje ibisabwa",
+      text: "Injiza izina ryemewe (inyuguti gusa, nibura inyuguti 2).",
+    },
+    invalidAddress: {
+      title: "Aderesi ntiryujuje ibisabwa",
+      text: "Injiza aderesi cyangwa aho uri (byibuze inyuguti 5).",
+    },
+    invalidPhone: {
+      title: "Numero ya telefoni itariyo",
+      text: "Injiza numero ya telefoni yemewe.",
+    },
+    invalidEmail: {
+      title: "Email itariyo",
+      text: "Injiza email yemewe cyangwa uyisige ubusa.",
+    },
+    invalidNationalId: {
+      title: "Indangamuntu itariyo",
+      text: "Indangamuntu igomba kuba imibare 16 gusa.",
+    },
+    invalidPassport: {
+      title: "Pasiporo itariyo",
+      text: "Injiza numero ya pasiporo yemewe.",
+    },
+    successContact: {
+      text: "Ubutumwa bwawe bwoherejwe neza!",
+    },
+    submissionError: {
+      title: "Ikosa mu kohereza",
+      text: "Hari ikitagenda neza. Ongera ugerageze nyuma.",
+    },
+    invalidMessage: { text: "Nyamuneka andika ubutumwa." },
+  },
 };
 
 export default rw;

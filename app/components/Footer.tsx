@@ -1,6 +1,8 @@
 // components/Footer.tsx
 "use client";
 import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
 import {
   FaFacebookF,
   FaTwitter,
@@ -10,6 +12,7 @@ import {
 import { Mail, Phone, MapPin, ArrowRight } from "lucide-react";
 import logo from "@/public/logo.png";
 import { useFooterTranslation } from "@/app/hooks/footer";
+import toast from "react-hot-toast";
 
 // --- Types ---
 interface SocialMedia {
@@ -35,6 +38,9 @@ interface Newsletter {
   subtitle: string;
   placeholder: string;
   button: string;
+  subscriptionSuccess: string;
+  submissionError: string;
+  invalidEmail: string;
 }
 
 interface FooterTranslation {
@@ -52,6 +58,44 @@ interface FooterTranslation {
 
 export default function Footer() {
   const t = useFooterTranslation() as FooterTranslation;
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+  const handleNewsletterSubmit = async (
+    e: React.FormEvent<HTMLFormElement>
+  ) => {
+    e.preventDefault();
+
+    // Basic email validation
+    if (
+      !email ||
+      !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)
+    ) {
+      toast.error(t.newsletter.invalidEmail || "Please enter a valid email");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const res = await fetch("http://localhost:5000/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Subscription failed");
+
+      toast.success(
+        t.newsletter.subscriptionSuccess || "Subscribed successfully!"
+      );
+      setEmail("");
+    } catch (err) {
+      console.error(err);
+      toast.error(t.newsletter.submissionError || "Failed to subscribe");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <footer className="bg-gray-900 text-gray-200">
@@ -98,7 +142,7 @@ export default function Footer() {
                 className="flex items-center gap-2 hover:text-white transition-colors"
               >
                 <ArrowRight className="w-4 h-4 text-blue-500" />
-                <a href={link.href}>{link.label}</a>
+                <Link href={link.href}>{link.label}</Link>
               </li>
             ))}
           </ul>
@@ -143,9 +187,14 @@ export default function Footer() {
             {t.newsletter.title}
           </h3>
           <p className="text-gray-400 mb-4">{t.newsletter.subtitle}</p>
-          <form className="flex flex-col sm:flex-row gap-2">
+          <form
+            className="flex flex-col sm:flex-row gap-2"
+            onSubmit={handleNewsletterSubmit}
+          >
             <input
               type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder={t.newsletter.placeholder}
               className="w-full px-4 py-2 rounded-lg border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-600 bg-gray-800 text-white"
             />

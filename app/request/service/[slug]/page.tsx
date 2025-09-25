@@ -57,18 +57,12 @@ export default function ServicePage() {
     );
   }
 
-  const handleSubmit = (data: ServiceRequestData) => {
-    console.log("Order Submitted:", data);
-    // TODO: send this data to API / email service
-  };
-
   return (
     <div className="p-6">
       <h1 className="text-3xl text-center font-bold mb-4">{service.title}</h1>
       <ServiceRequestForm
         serviceName={service.title}
         description={service.description}
-        onSubmit={handleSubmit}
         request={t.services.request}
         submit={t.form.submit}
         placeholders={t.form.placeholders}

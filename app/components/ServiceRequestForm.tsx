@@ -1,6 +1,6 @@
 // components/ServiceRequestForm.tsx
 "use client";
-
+import toast from "react-hot-toast";
 import { useState } from "react";
 import {
   Mail,
@@ -11,7 +11,7 @@ import {
   Send,
   IdCard,
 } from "lucide-react";
-
+import { useTranslation } from "@/app/hooks/Slug";
 interface ServiceRequestData {
   name: string;
   email?: string;
@@ -46,13 +46,11 @@ interface ServiceRequestFormProps {
   request: string;
   placeholders: Placeholders;
   idType: IdTypeLabels;
-  onSubmit: (formData: ServiceRequestData) => void;
 }
 
 export default function ServiceRequestForm({
   serviceName,
   description,
-  onSubmit,
   submit,
   request,
   placeholders,
@@ -69,6 +67,7 @@ export default function ServiceRequestForm({
     passport: "",
   });
 
+  const t = useTranslation();
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -81,20 +80,85 @@ export default function ServiceRequestForm({
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const fullData = { service: serviceName, ...formData };
-    onSubmit(fullData);
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      address: "",
-      notes: "",
-      idType: "nationalId",
-      nationalId: "",
-      passport: "",
-    });
+
+    const fullData = { serviceName, ...formData };
+
+    // ---------------- Validation ----------------
+    if (!formData.name || !/^[A-Za-z\s]{2,50}$/.test(formData.name)) {
+      toast.error(t.alerts.invalidName.text);
+      return;
+    }
+
+    if (!formData.address || formData.address.trim().length < 5) {
+      toast.error(t.alerts.invalidAddress.text);
+      return;
+    }
+
+    if (!formData.phone || !/^[0-9+\-\s]{7,15}$/.test(formData.phone)) {
+      toast.error(t.alerts.invalidPhone.text);
+      return;
+    }
+
+    if (
+      formData.email &&
+      !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(formData.email)
+    ) {
+      toast.error(t.alerts.invalidEmail.text);
+      return;
+    }
+
+    if (
+      formData.idType === "nationalId" &&
+      !/^\d{16}$/.test(String(formData.nationalId || ""))
+    ) {
+      toast.error(t.alerts.invalidNationalId.text);
+      return;
+    }
+
+    if (
+      formData.idType === "passport" &&
+      (!formData.passport || formData.passport.trim().length < 3)
+    ) {
+      toast.error(t.alerts.invalidPassport.text);
+      return;
+    }
+
+    // ---------------- Submit ----------------
+    try {
+      const response = await fetch(
+        "http://localhost:5000/api/service-request",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(fullData),
+        }
+      );
+
+      const data = await response.json(); // Read JSON from response
+      console.log("Response data:", data);
+
+      if (!response.ok) {
+        toast.error(data.error || t.alerts.submissionError.text);
+        return;
+      }
+      toast.success(t.alerts.success.text);
+
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        address: "",
+        notes: "",
+        idType: "nationalId",
+        nationalId: "",
+        passport: "",
+      });
+    } catch (error) {
+      console.error(error);
+      toast.error(t.alerts.submissionError.text);
+    }
   };
 
   return (
@@ -119,7 +183,6 @@ export default function ServiceRequestForm({
           value={formData.name}
           onChange={handleChange}
           className="w-full p-2 outline-none"
-          required
         />
       </div>
 
@@ -146,7 +209,6 @@ export default function ServiceRequestForm({
           value={formData.phone}
           onChange={handleChange}
           className="w-full p-2 outline-none"
-          required
         />
       </div>
 
@@ -160,7 +222,6 @@ export default function ServiceRequestForm({
           value={formData.address}
           onChange={handleChange}
           className="w-full p-2 outline-none"
-          required
         />
       </div>
 
@@ -195,7 +256,6 @@ export default function ServiceRequestForm({
             value={formData.nationalId}
             onChange={handleChange}
             className="w-full p-2 outline-none"
-            required
           />
         </div>
       )}
@@ -211,7 +271,6 @@ export default function ServiceRequestForm({
             value={formData.passport}
             onChange={handleChange}
             className="w-full p-2 outline-none"
-            required
           />
         </div>
       )}
