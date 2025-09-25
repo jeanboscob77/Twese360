@@ -2,15 +2,41 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, Phone, MapPin, User, FileText, Send } from "lucide-react";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  User,
+  FileText,
+  Send,
+  IdCard,
+} from "lucide-react";
 
 interface ServiceRequestData {
+  name: string;
+  email?: string;
+  phone: string;
+  address: string;
+  notes?: string;
+  idType?: "nationalId" | "passport";
+  nationalId?: string;
+  passport?: string;
+}
+
+interface Placeholders {
   name: string;
   email: string;
   phone: string;
   address: string;
-  serviceName?: string;
-  notes?: string;
+  notes: string;
+  nationalId: string;
+  passport: string;
+}
+
+interface IdTypeLabels {
+  label: string;
+  nationalId: string;
+  passport: string;
 }
 
 interface ServiceRequestFormProps {
@@ -18,6 +44,8 @@ interface ServiceRequestFormProps {
   description?: string;
   submit: string;
   request: string;
+  placeholders: Placeholders;
+  idType: IdTypeLabels;
   onSubmit: (formData: ServiceRequestData) => void;
 }
 
@@ -27,17 +55,24 @@ export default function ServiceRequestForm({
   onSubmit,
   submit,
   request,
+  placeholders,
+  idType,
 }: ServiceRequestFormProps) {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<ServiceRequestData>({
     name: "",
     email: "",
     phone: "",
     address: "",
     notes: "",
+    idType: "nationalId",
+    nationalId: "",
+    passport: "",
   });
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -56,6 +91,9 @@ export default function ServiceRequestForm({
       phone: "",
       address: "",
       notes: "",
+      idType: "nationalId",
+      nationalId: "",
+      passport: "",
     });
   };
 
@@ -77,7 +115,7 @@ export default function ServiceRequestForm({
         <input
           type="text"
           name="name"
-          placeholder="Your Name"
+          placeholder={placeholders.name}
           value={formData.name}
           onChange={handleChange}
           className="w-full p-2 outline-none"
@@ -85,17 +123,16 @@ export default function ServiceRequestForm({
         />
       </div>
 
-      {/* Email */}
+      {/* Email (optional) */}
       <div className="flex items-center border rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-blue-500">
         <Mail className="w-5 h-5 text-gray-500 mx-2" />
         <input
           type="email"
           name="email"
-          placeholder="Your Email"
+          placeholder={placeholders.email}
           value={formData.email}
           onChange={handleChange}
           className="w-full p-2 outline-none"
-          required
         />
       </div>
 
@@ -105,7 +142,7 @@ export default function ServiceRequestForm({
         <input
           type="text"
           name="phone"
-          placeholder="Your Phone"
+          placeholder={placeholders.phone}
           value={formData.phone}
           onChange={handleChange}
           className="w-full p-2 outline-none"
@@ -119,7 +156,7 @@ export default function ServiceRequestForm({
         <input
           type="text"
           name="address"
-          placeholder="Your Address / Location"
+          placeholder={placeholders.address}
           value={formData.address}
           onChange={handleChange}
           className="w-full p-2 outline-none"
@@ -127,12 +164,63 @@ export default function ServiceRequestForm({
         />
       </div>
 
+      {/* ID Type Selection */}
+      <div className=" text-gray-500">
+        <label className="block text-sm  text-gray-500 font-semibold mb-2">
+          {idType.label}
+        </label>
+        <select
+          name="idType"
+          value={formData.idType}
+          onChange={handleChange}
+          className="w-full border rounded-lg p-2"
+        >
+          <option value="nationalId" className=" text-gray-500">
+            {idType.nationalId}
+          </option>
+          <option value="passport" className=" text-gray-500">
+            {idType.passport}
+          </option>
+        </select>
+      </div>
+
+      {/* National ID */}
+      {formData.idType === "nationalId" && (
+        <div className="flex items-center border rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-blue-500">
+          <IdCard className="w-5 h-5 text-gray-500 mx-2" />
+          <input
+            type="text"
+            name="nationalId"
+            placeholder={placeholders.nationalId}
+            value={formData.nationalId}
+            onChange={handleChange}
+            className="w-full p-2 outline-none"
+            required
+          />
+        </div>
+      )}
+
+      {/* Passport */}
+      {formData.idType === "passport" && (
+        <div className="flex items-center border rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-blue-500">
+          <IdCard className="w-5 h-5 text-gray-500 mx-2" />
+          <input
+            type="text"
+            name="passport"
+            placeholder={placeholders.passport}
+            value={formData.passport}
+            onChange={handleChange}
+            className="w-full p-2 outline-none"
+            required
+          />
+        </div>
+      )}
       {/* Notes */}
       <div className="flex items-start border rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-blue-500">
         <FileText className="w-5 h-5 text-gray-500 mx-2 mt-2" />
         <textarea
           name="notes"
-          placeholder="Additional details..."
+          placeholder={placeholders.notes}
           value={formData.notes}
           onChange={handleChange}
           rows={3}

@@ -1,5 +1,23 @@
 // translations/en.ts
 const en = {
+  form: {
+    request: "Request Service",
+    submit: "Submit Request",
+    placeholders: {
+      name: "Your Name",
+      email: "Your Email (optional)",
+      phone: "Your Phone",
+      address: "Your Address / Location",
+      notes: "Additional details...",
+      nationalId: "Enter your National ID",
+      passport: "Enter your Passport Number",
+    },
+    idType: {
+      label: "Choose ID type:",
+      nationalId: "National ID",
+      passport: "Passport",
+    },
+  },
   services: {
     submit: "Submit",
     request: "Request Service",

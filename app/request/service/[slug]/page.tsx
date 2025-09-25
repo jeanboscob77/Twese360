@@ -1,8 +1,17 @@
-// app/services/[slug]/page.tsx
 "use client";
 import { useTranslation } from "@/app/hooks/Slug";
 import ServiceRequestForm from "@/app/components/ServiceRequestForm";
 import { useParams } from "next/navigation";
+
+interface Placeholders {
+  name: string;
+  email: string;
+  phone: string;
+  address: string;
+  notes: string;
+  nationalId: string;
+  passport: string;
+}
 
 interface Service {
   title: string;
@@ -10,25 +19,31 @@ interface Service {
   "not-found": string;
   submit: string;
   request: string;
+  placeholders: Placeholders;
 }
 
 interface ServiceRequestData {
   name: string;
-  email: string;
+  email?: string;
   phone: string;
   address: string;
   serviceName?: string;
-  message?: string;
+  notes?: string;
+  idType?: "nationalId" | "passport";
+  nationalId?: string;
+  passport?: string;
 }
 
 export default function ServicePage() {
-  const pramas = useParams();
-  const slug = pramas?.slug;
+  const params = useParams();
+  const slug = params?.slug as string | undefined;
   const t = useTranslation();
-  const rawService = t.services[slug as keyof typeof t.services];
+
+  // Pick service from translations
+  const rawService = slug ? t.services[slug as keyof typeof t.services] : null;
   const service: Service | undefined =
+    rawService &&
     typeof rawService === "object" &&
-    rawService !== null &&
     "title" in rawService &&
     "description" in rawService
       ? (rawService as Service)
@@ -44,7 +59,7 @@ export default function ServicePage() {
 
   const handleSubmit = (data: ServiceRequestData) => {
     console.log("Order Submitted:", data);
-    // Later: send this data to API / email service
+    // TODO: send this data to API / email service
   };
 
   return (
@@ -55,7 +70,9 @@ export default function ServicePage() {
         description={service.description}
         onSubmit={handleSubmit}
         request={t.services.request}
-        submit={t.services.submit}
+        submit={t.form.submit}
+        placeholders={t.form.placeholders}
+        idType={t.form.idType}
       />
     </div>
   );

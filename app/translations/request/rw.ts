@@ -1,5 +1,23 @@
 // translations/rw.ts
 const rw = {
+  form: {
+    request: "Saba Serivisi",
+    submit: "Ohereza Ibisabwa",
+    placeholders: {
+      name: "Izina ryawe",
+      email: "Imeli yawe (si ngombwa)",
+      phone: "Numero ya telefone",
+      address: "Aderesi yawe / Ahantu",
+      notes: "Andi makuru...",
+      nationalId: "Injiza Indangamuntu yawe",
+      passport: "Injiza Numero ya Pasiporo",
+    },
+    idType: {
+      label: "Hitamo ubwoko bw'indangamuntu:",
+      nationalId: "Indangamuntu",
+      passport: "Pasiporo",
+    },
+  },
   services: {
     submit: "Ohereza",
     request: "Serivisi Uri gusaba",
