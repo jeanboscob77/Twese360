@@ -96,6 +96,9 @@ export default function Footer() {
       setLoading(false);
     }
   };
+  if (loading) {
+    return <div className="text-center py-10">Loading...</div>;
+  }
 
   return (
     <footer className="bg-gray-900 text-gray-200">

@@ -22,18 +22,6 @@ interface Service {
   placeholders: Placeholders;
 }
 
-interface ServiceRequestData {
-  name: string;
-  email?: string;
-  phone: string;
-  address: string;
-  serviceName?: string;
-  notes?: string;
-  idType?: "nationalId" | "passport";
-  nationalId?: string;
-  passport?: string;
-}
-
 export default function ServicePage() {
   const params = useParams();
   const slug = params?.slug as string | undefined;
