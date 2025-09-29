@@ -10,6 +10,16 @@ interface Message {
   timestamp: string;
 }
 
+function TypingIndicator() {
+  return (
+    <div className="flex space-x-1 p-2 text-gray-500">
+      <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce [animation-delay:-0.3s]"></span>
+      <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce [animation-delay:-0.15s]"></span>
+      <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></span>
+    </div>
+  );
+}
+
 export default function AdminChat() {
   const [clients, setClients] = useState<string[]>([]);
   const [selectedClient, setSelectedClient] = useState<string | null>(null);
@@ -19,6 +29,10 @@ export default function AdminChat() {
   const [input, setInput] = useState("");
   const [collapsed, setCollapsed] = useState(true);
   const [unreadCount, setUnreadCount] = useState(0);
+  // --- typing state per client
+  const [typingClients, setTypingClients] = useState<Record<string, boolean>>(
+    {}
+  );
 
   const socketRef = useRef<Socket | null>(null);
   useEffect(() => {
@@ -39,6 +53,15 @@ export default function AdminChat() {
       if (collapsed || msg.clientId !== selectedClient) {
         setUnreadCount((c) => c + 1);
       }
+    });
+
+    // typing events from clients
+    socket.on("typing", ({ senderId }) => {
+      setTypingClients((prev) => ({ ...prev, [senderId]: true }));
+    });
+
+    socket.on("stop_typing", ({ senderId }) => {
+      setTypingClients((prev) => ({ ...prev, [senderId]: false }));
     });
 
     return () => {
@@ -72,6 +95,27 @@ export default function AdminChat() {
     setUnreadCount(0);
   };
 
+  let typingTimeout: NodeJS.Timeout;
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInput(e.target.value);
+
+    if (!socketRef.current || !selectedClient) return;
+
+    socketRef.current.emit("typing", {
+      senderId: "admin",
+      receiverId: selectedClient,
+    });
+
+    clearTimeout(typingTimeout);
+    typingTimeout = setTimeout(() => {
+      socketRef.current?.emit("stop_typing", {
+        senderId: "admin",
+        receiverId: selectedClient,
+      });
+    }, 1000); // stop after 1s of no typing
+  };
+
   return (
     <div className="fixed bottom-4 right-4 flex flex-col items-end space-y-1">
       {/* Toggle button */}
@@ -92,9 +136,6 @@ export default function AdminChat() {
         <div className="mt-1 border rounded-xl shadow-lg flex flex-col h-[28rem] w-80 bg-white">
           <div className="bg-green-500 text-white p-2 rounded-t-xl flex justify-between items-center">
             <span>Admin Chat</span>
-            <button onClick={() => setCollapsed(true)}>
-              <X size={20} />
-            </button>
           </div>
 
           {/* Clients */}
@@ -128,6 +169,10 @@ export default function AdminChat() {
                   {msg.content}
                 </div>
               ))}
+            {/* typing indicator */}
+            {selectedClient && typingClients[selectedClient] && (
+              <TypingIndicator />
+            )}
           </div>
 
           {/* Input */}
@@ -137,7 +182,7 @@ export default function AdminChat() {
                 className="flex-1 border rounded-full px-3 py-1 text-sm"
                 placeholder="Message..."
                 value={input}
-                onChange={(e) => setInput(e.target.value)}
+                onChange={handleInputChange}
                 onKeyDown={(e) => e.key === "Enter" && sendMessage()}
               />
               <button

@@ -38,6 +38,19 @@ io.on("connection", (socket) => {
     messages[socket.id] = messages[socket.id] || [];
     console.log("Client joined:", socket.id);
 
+    // Send welcome message to this client
+    const welcomeMsg = {
+      sender: "system",
+      clientId: socket.id,
+      content: "👋 Welcome! An admin will be with you shortly.",
+      timestamp: new Date().toISOString(),
+    };
+
+    // store it
+    messages[socket.id].push(welcomeMsg);
+
+    // send it to this client
+    io.to(socket.id).emit("receive_message", welcomeMsg);
     // Notify admin of all clients
     const admins = Object.values(clients).filter((c) => c.role === "admin");
     admins.forEach((a) =>
@@ -53,13 +66,34 @@ io.on("connection", (socket) => {
     io.emit("admin_status", { online: true });
     // Send all client IDs to admin
     socket.emit("client_list", Object.keys(messages));
-
     // Send all messages to admin
     Object.keys(messages).forEach((clientId) => {
       messages[clientId].forEach((msg) => {
         socket.emit("receive_message", { ...msg, clientId });
       });
     });
+  });
+
+  /// typing event
+  socket.on("typing", ({ senderId, receiverId }) => {
+    if (receiverId) {
+      io.to(receiverId).emit("typing", { senderId });
+    } else {
+      // if no specific receiver, send to all admins
+      Object.values(clients)
+        .filter((c) => c.role === "admin")
+        .forEach((a) => io.to(a.id).emit("typing", { senderId }));
+    }
+  });
+
+  socket.on("stop_typing", ({ senderId, receiverId }) => {
+    if (receiverId) {
+      io.to(receiverId).emit("stop_typing", { senderId });
+    } else {
+      Object.values(clients)
+        .filter((c) => c.role === "admin")
+        .forEach((a) => io.to(a.id).emit("stop_typing", { senderId }));
+    }
   });
 
   socket.on("send_message", (msg) => {
