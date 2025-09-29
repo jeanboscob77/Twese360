@@ -11,10 +11,13 @@ export const loginAdmin = createAsyncThunk<
       password,
     });
     return res.data.token;
-  } catch (err: any) {
-    return thunkAPI.rejectWithValue(
-      err.response?.data?.message || "Login failed"
-    );
+  } catch (err) {
+    if (axios.isAxiosError(err)) {
+      return thunkAPI.rejectWithValue(
+        err.response?.data?.message || "Login failed"
+      );
+    }
+    return thunkAPI.rejectWithValue("Unexpected error");
   }
 });
 
