@@ -6,7 +6,9 @@ import { Provider } from "react-redux";
 import { store } from "./store/store";
 import Footer from "./components/Footer";
 import GoTop from "./components/GoTop";
+import ChatWidget from "./components/ChatBot";
 import { Toaster } from "react-hot-toast";
+import { usePathname } from "next/navigation";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -22,6 +24,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const pathname = usePathname();
+
+  const hideChat = pathname.startsWith("/auth/admin");
   return (
     <html lang="en">
       <body
@@ -30,6 +35,8 @@ export default function RootLayout({
         <Provider store={store}>
           <Header />
           {children}
+          {!hideChat && <ChatWidget />}
+
           <GoTop />
           <Footer />
           <Toaster position="top-right" reverseOrder={false} />

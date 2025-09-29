@@ -21,10 +21,8 @@ router.post("/", async (req, res) => {
     (service_name, name, email, phone, address, id_type, national_id, passport, notes, status) 
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `;
-
-  await db.query(
-    query,
-    [
+  try {
+    const [result] = await db.query(query, [
       serviceName,
       name,
       email || null,
@@ -35,18 +33,16 @@ router.post("/", async (req, res) => {
       passport || null,
       notes || null,
       "pending",
-    ],
-    (err, result) => {
-      if (err) {
-        console.error(err);
-        return res.status(500).json({ message: "Database error" });
-      }
-      res.json({
-        message: "Request submitted successfully",
-        id: result.insertId,
-      });
-    }
-  );
+    ]);
+
+    res.json({
+      message: "Request submitted successfully",
+      id: result.insertId,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Database error" });
+  }
 });
 
 router.put("/:id/done", async (req, res) => {

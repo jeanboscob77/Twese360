@@ -1,8 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
-import { CheckCircle, Mail, Phone, Trash2 } from "lucide-react";
+import { CheckCircle, Mail, Phone, Trash2, LogOut } from "lucide-react";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "@/app/store/store";
 
+import { logout } from "@/app/store/adminSlice";
+import AdminChat from "@/app/components/AdminChat";
 // --- Types ---
 interface ServiceRequest {
   id: number;
@@ -33,7 +38,9 @@ interface Subscriber {
 
 // --- Main Component ---
 export default function AdminDashboard() {
+  const dispatch = useDispatch();
   const [requests, setRequests] = useState<ServiceRequest[]>([]);
+
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [subscribers, setSubscribers] = useState<Subscriber[]>([]);
   const [loading, setLoading] = useState(false);
@@ -56,7 +63,7 @@ export default function AdminDashboard() {
     try {
       const res = await fetch("http://localhost:5000/api/admin/contacts");
       const data = await res.json();
-      setContacts(data);
+      setContacts(Array.isArray(data) ? data : []);
     } catch (err) {
       console.error(err);
       toast.error("Failed to fetch contacts");
@@ -67,7 +74,7 @@ export default function AdminDashboard() {
     try {
       const res = await fetch("http://localhost:5000/api/admin/subscribers");
       const data = await res.json();
-      setSubscribers(data);
+      setSubscribers(Array.isArray(data) ? data : []);
     } catch (err) {
       console.error(err);
       toast.error("Failed to fetch subscribers");
@@ -129,6 +136,27 @@ export default function AdminDashboard() {
     fetchSubscribers();
   }, []);
 
+  const router = useRouter();
+  const { token } = useSelector((state: RootState) => state.admin);
+
+  useEffect(() => {
+    if (!token) {
+      router.push("/auth/admin/login"); // redirect if not logged in
+    }
+  }, [token, router]);
+
+  if (!token)
+    return (
+      <div className="min-h-screen text-center flex justify-center items-center">
+        Redirecting...
+      </div>
+    );
+
+  // 🔹 Logout function
+  const handleLogout = () => {
+    dispatch(logout());
+    router.push("/auth/admin/login");
+  };
   console.log("Requests:", requests);
   const renderCard = (title: string, children: React.ReactNode) => (
     <div className="mb-8">
@@ -145,7 +173,17 @@ export default function AdminDashboard() {
 
   return (
     <div className="p-4">
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-2xl font-bold">Admin Dashboard</h1>
+        <button
+          onClick={handleLogout}
+          className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg"
+        >
+          <LogOut className="w-5 h-5" /> Logout
+        </button>
+      </div>
       {/* Service Requests */}
+      <AdminChat />
       <div className="mb-4 flex gap-2">
         {["all", "pending", "done"].map((status) => (
           <button
