@@ -29,6 +29,7 @@ const io = new Server(server, { cors: { origin: "*" } });
 
 const clients = {}; // { socketId: { id, role } }
 const messages = {}; // { clientId: [{sender, content, timestamp}] }
+
 let adminOnline = false;
 io.on("connection", (socket) => {
   console.log("New connection:", socket.id);
@@ -40,14 +41,11 @@ io.on("connection", (socket) => {
 
     // Send welcome message to this client
     const welcomeMsg = {
-      sender: "system",
+      sender: "admin",
       clientId: socket.id,
       content: "👋 Welcome! An admin will be with you shortly.",
       timestamp: new Date().toISOString(),
     };
-
-    // store it
-    messages[socket.id].push(welcomeMsg);
 
     // send it to this client
     io.to(socket.id).emit("receive_message", welcomeMsg);
@@ -56,12 +54,18 @@ io.on("connection", (socket) => {
     admins.forEach((a) =>
       io.to(a.id).emit("client_list", Object.keys(messages))
     );
+
+    // If admin is online, notify client
+    io.to(socket.id).emit("admin_status", { online: adminOnline });
   });
 
   socket.on("admin_join", () => {
     clients[socket.id] = { id: socket.id, role: "admin" };
+
     console.log("Admin joined:", socket.id);
+    socket.isAdmin = true;
     adminOnline = true;
+
     // Notify all clients that admin is online
     io.emit("admin_status", { online: true });
     // Send all client IDs to admin
