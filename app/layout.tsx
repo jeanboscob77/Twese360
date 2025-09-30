@@ -9,6 +9,7 @@ import GoTop from "./components/GoTop";
 import ChatWidget from "./components/ChatBot";
 import { Toaster } from "react-hot-toast";
 import { usePathname } from "next/navigation";
+import { ClientOnly } from "./components/ClientOnly";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -24,9 +25,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const pathname = usePathname();
-
-  const hideChat = pathname.startsWith("/auth/admin");
   return (
     <html lang="en">
       <body
@@ -35,8 +33,7 @@ export default function RootLayout({
         <Provider store={store}>
           <Header />
           {children}
-          {!hideChat && <ChatWidget />}
-
+          {!usePathname().startsWith("/auth/admin") && <ChatWidget />}
           <GoTop />
           <Footer />
           <Toaster position="top-right" reverseOrder={false} />

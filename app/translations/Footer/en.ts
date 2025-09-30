@@ -14,12 +14,12 @@ const en = {
       { label: "About Us", href: "#" },
       { label: "Services", href: "#" },
       { label: "Contact", href: "#" },
-      { label: "FAQ", href: "/faq" },
+      { label: "FAQ", href: "#" },
     ],
     contact: {
       address: "Kigali, Rwanda",
       email: "info@twese360.rw",
-      phones: ["+250 788 123 456", "+250 789 654 321"],
+      phones: ["+250 782 150 455", "+250 783 214 787"],
     },
     newsletter: {
       title: "Newsletter",
