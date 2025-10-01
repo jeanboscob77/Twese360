@@ -29,13 +29,16 @@ export default function ServiceDetail() {
   return (
     <div className="max-w-5xl mx-auto px-4 py-10">
       {/* Hero Image */}
-      <div className="relative h-72 w-full mb-8">
+      <div className="relative w-full h-72 md:h-96 lg:h-[28rem] mb-8 overflow-hidden rounded-2xl shadow-lg">
         <Image
           src={service.image}
           alt={service.title}
           fill
-          className="rounded-2xl object-cover shadow-md"
+          priority
+          className="object-cover transition-transform duration-500 ease-in-out hover:scale-105"
         />
+        {/* Optional dark overlay for text contrast */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent rounded-2xl" />
       </div>
 
       {/* Title & Description */}

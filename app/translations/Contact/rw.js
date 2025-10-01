@@ -11,8 +11,8 @@ const rw = {
       submit: "Ohereza Ubutumwa",
     },
     address: {
-      email: "info@example.com",
-      phones: ["+250 788 123 456", "+250 789 654 321"],
+      email: "twese360@gmail.com",
+      phones: ["+250 782 150 455", "+250 783 214 787"],
       location: "Kigali, Rwanda",
       website: "www.twese360.rw",
     },

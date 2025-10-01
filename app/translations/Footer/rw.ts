@@ -18,7 +18,7 @@ const rw = {
     ],
     contact: {
       address: "Kigali, Rwanda",
-      email: "info@twese360.rw",
+      email: "twese360@gmail.com",
       phones: ["+250 782 150 455", "+250 783 214 787"],
     },
     newsletter: {
