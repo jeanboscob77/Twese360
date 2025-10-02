@@ -50,7 +50,9 @@ export default function AdminDashboard() {
 
   const fetchRequests = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/admin/services");
+      const res = await fetch(
+        "https://twese360.onrender.com/api/admin/services"
+      );
       const data = await res.json();
       setRequests(Array.isArray(data) ? data : data.data || []);
     } catch (err) {
@@ -61,7 +63,9 @@ export default function AdminDashboard() {
 
   const fetchContacts = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/admin/contacts");
+      const res = await fetch(
+        "https://twese360.onrender.com/api/admin/contacts"
+      );
       const data = await res.json();
       setContacts(Array.isArray(data) ? data : []);
     } catch (err) {
@@ -72,7 +76,9 @@ export default function AdminDashboard() {
 
   const fetchSubscribers = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/admin/subscribers");
+      const res = await fetch(
+        "https://twese360.onrender.com/api/admin/subscribers"
+      );
       const data = await res.json();
       setSubscribers(Array.isArray(data) ? data : []);
     } catch (err) {
@@ -85,7 +91,7 @@ export default function AdminDashboard() {
     setLoading(true);
     try {
       const res = await fetch(
-        `http://localhost:5000/api/service-request/${id}/done`,
+        `https://twese360.onrender.com/api/service-request/${id}/done`,
         {
           method: "PUT",
         }
@@ -104,9 +110,12 @@ export default function AdminDashboard() {
 
   const deleteContact = async (id: string) => {
     try {
-      const res = await fetch(`http://localhost:5000/api/contact/${id}`, {
-        method: "DELETE",
-      });
+      const res = await fetch(
+        `https://twese360.onrender.com/api/contact/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
       if (!res.ok) throw new Error("Failed to delete contact");
       toast.success("Contact deleted");
       fetchContacts();
@@ -118,9 +127,12 @@ export default function AdminDashboard() {
 
   const deleteSubscriber = async (id: string) => {
     try {
-      const res = await fetch(`http://localhost:5000/api/newsletter/${id}`, {
-        method: "DELETE",
-      });
+      const res = await fetch(
+        `https://twese360.onrender.com/api/newsletter/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
       if (!res.ok) throw new Error("Failed to delete subscriber");
       toast.success("Subscriber deleted");
       fetchSubscribers();
