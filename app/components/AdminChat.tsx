@@ -36,7 +36,7 @@ export default function AdminChat() {
 
   const socketRef = useRef<Socket | null>(null);
   useEffect(() => {
-    const socket = io("http://localhost:5000");
+    const socket = io("https://twese360.onrender.com");
     socketRef.current = socket;
 
     socket.emit("admin_join");

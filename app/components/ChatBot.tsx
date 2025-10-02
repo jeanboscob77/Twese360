@@ -19,7 +19,7 @@ function TypingIndicator() {
     </div>
   );
 }
-const socket = io("http://localhost:5000");
+const socket = io("https://twese360.onrender.com");
 
 export default function ClientChat() {
   const [messages, setMessages] = useState<Message[]>([]);
