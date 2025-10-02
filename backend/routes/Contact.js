@@ -39,7 +39,7 @@ router.post("/", async (req, res) => {
   const { name, email, phone, message } = req.body;
 
   // Basic validation
-  if (!name || !message || email) {
+  if (!name || !message || !email) {
     return res
       .status(400)
       .json({ error: "Name, Email and message are required" });
