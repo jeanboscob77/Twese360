@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const http = require("http");
 const { Server } = require("socket.io");
+const connectDB = require("./config/db");
 
 const serviceRequestRoutes = require("./routes/serviceRequest");
 const ContactRoutes = require("./routes/Contact");
@@ -143,7 +144,18 @@ io.on("connection", (socket) => {
   });
 });
 
-// Start server
-server.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+const startServer = async () => {
+  try {
+    await connectDB();
+
+    // Start server
+    server.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+  } catch (err) {
+    console.error("Failed to start server:", err.message);
+    process.exit(1); // optional: exit if DB connection fails
+  }
+};
+
+startServer();

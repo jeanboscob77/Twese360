@@ -10,7 +10,7 @@ import { logout } from "@/app/store/adminSlice";
 import AdminChat from "@/app/components/AdminChat";
 // --- Types ---
 interface ServiceRequest {
-  id: number;
+  _id: string;
   name: string;
   email: string;
   phone?: string;
@@ -22,7 +22,7 @@ interface ServiceRequest {
 }
 
 interface Contact {
-  id: number;
+  _id: string;
   name: string;
   email: string;
   phone?: string;
@@ -31,7 +31,7 @@ interface Contact {
 }
 
 interface Subscriber {
-  id: number;
+  _id: string;
   email: string;
   created_at: string;
 }
@@ -81,7 +81,7 @@ export default function AdminDashboard() {
     }
   };
 
-  const markRequestDone = async (id: number) => {
+  const markRequestDone = async (id: string) => {
     setLoading(true);
     try {
       const res = await fetch(
@@ -102,7 +102,7 @@ export default function AdminDashboard() {
     }
   };
 
-  const deleteContact = async (id: number) => {
+  const deleteContact = async (id: string) => {
     try {
       const res = await fetch(`http://localhost:5000/api/contact/${id}`, {
         method: "DELETE",
@@ -116,7 +116,7 @@ export default function AdminDashboard() {
     }
   };
 
-  const deleteSubscriber = async (id: number) => {
+  const deleteSubscriber = async (id: string) => {
     try {
       const res = await fetch(`http://localhost:5000/api/newsletter/${id}`, {
         method: "DELETE",
@@ -204,7 +204,7 @@ export default function AdminDashboard() {
         "Service Requests",
         filteredRequests.map((req) => (
           <div
-            key={req.id}
+            key={req._id}
             className="bg-white rounded-2xl shadow-md p-4 flex flex-col justify-between"
           >
             <div>
@@ -245,7 +245,7 @@ export default function AdminDashboard() {
             {req.status === "pending" && (
               <button
                 disabled={loading}
-                onClick={() => markRequestDone(req.id)}
+                onClick={() => markRequestDone(req._id)}
                 className="mt-4 flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 transition-colors text-white font-medium"
               >
                 <CheckCircle className="w-5 h-5" /> Mark as Done
@@ -260,7 +260,7 @@ export default function AdminDashboard() {
         "Contacts",
         contacts.map((c) => (
           <div
-            key={c.id}
+            key={c._id}
             className="bg-white rounded-2xl shadow-md p-4 flex flex-col justify-between"
           >
             <div>
@@ -280,7 +280,7 @@ export default function AdminDashboard() {
               </p>
             </div>
             <button
-              onClick={() => deleteContact(c.id)}
+              onClick={() => deleteContact(c._id)}
               className="mt-4 flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 transition-colors text-white font-medium"
             >
               <Trash2 className="w-4 h-4" /> Delete
@@ -294,7 +294,7 @@ export default function AdminDashboard() {
         "Subscribers",
         subscribers.map((s) => (
           <div
-            key={s.id}
+            key={s._id}
             className="bg-white rounded-2xl shadow-md p-4 flex flex-col justify-between"
           >
             <div>
@@ -306,7 +306,7 @@ export default function AdminDashboard() {
               </p>
             </div>
             <button
-              onClick={() => deleteSubscriber(s.id)}
+              onClick={() => deleteSubscriber(s._id)}
               className="mt-4 flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 transition-colors text-white font-medium"
             >
               <Trash2 className="w-4 h-4" /> Delete
