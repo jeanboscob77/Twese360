@@ -6,10 +6,13 @@ export const loginAdmin = createAsyncThunk<
   { rejectValue: string } // reject type
 >("admin/login", async ({ username, password }, thunkAPI) => {
   try {
-    const res = await axios.post("http://localhost:5000/api/auth/login", {
-      username,
-      password,
-    });
+    const res = await axios.post(
+      "https://twese360.onrender.com/api/auth/login",
+      {
+        username,
+        password,
+      }
+    );
     return res.data.token;
   } catch (err) {
     if (axios.isAxiosError(err)) {
